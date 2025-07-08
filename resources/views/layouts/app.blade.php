@@ -10,6 +10,7 @@
 </head>
 <!-- Trix Editor CSS -->
 <link rel="stylesheet" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+@stack('styles')
 
 <body>
     <div class="page-container">
