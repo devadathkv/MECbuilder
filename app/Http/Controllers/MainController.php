@@ -10,6 +10,8 @@ use App\Models\Achievement;
 use App\Models\Reference;
 use App\Models\Course;
 use App\Models\Education;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
@@ -35,5 +37,24 @@ class MainController extends Controller
     ));
 
     }
+
+    public function downloadPDF()
+{
+    $user = auth()->user();
+
+    $data = [
+        'header' => $user->header,
+        'skills' => $user->skills,
+        'courses' => $user->courses,  // <-- Make sure this is eager-loaded
+        'achievements' => $user->achievements,
+        'references' => $user->references,
+        'education' => $user->education,
+        'projects' => $user->projects,
+    ];
+
+    $pdf = Pdf::loadView('mec.pdf.resume', $data)->setPaper('a4');
+
+    return $pdf->download('resume.pdf');
+}
 
 }

@@ -64,6 +64,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses/{course}/edit', [CourseController::class, 'edit'])->name('courses.edit');
     Route::put('/courses/{course}', [CourseController::class, 'update'])->name('courses.update');
     Route::delete('/courses/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
+    
+
+    Route::get('/resume/download', [MainController::class, 'downloadPDF'])->name('resume.download');
+
 });
 
 require __DIR__.'/auth.php';

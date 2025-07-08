@@ -247,31 +247,13 @@
         </div>
 
 
+        <br>
+        <br>
+        <div>
+            <a href="{{ route('resume.download') }}" class="btn btn-primary">Download Resume PDF</a>
+        </div>
 
-
-
-
-
-
-
-
-        {{-- Skills Section --}}
-        {{-- <div class="mb-5">
-        <h3>Skills</h3>
-        @forelse($skills as $skill)
-            <div>
-                • {{ $skill->name }}
-                <a href="{{ route('skills.edit', $skill->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                <form action="{{ route('skills.destroy', $skill->id) }}" method="POST" class="d-inline">
-                    @csrf @method('DELETE')
-                    <button class="btn btn-danger btn-sm">Delete</button>
-                </form>
-            </div>
-        @empty
-            <p>No skills added yet.</p>
-        @endforelse
-        <a href="{{ route('skills.create') }}" class="btn btn-success btn-sm">Add Skill</a>
-    </div> --}}
+        
 
 
     </div>

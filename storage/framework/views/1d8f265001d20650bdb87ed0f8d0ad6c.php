@@ -250,15 +250,12 @@
         </div>
 
 
+        <br>
+        <br>
+        <div>
+            <a href="<?php echo e(route('resume.download')); ?>" class="btn btn-primary">Download Resume PDF</a>
+        </div>
 
-
-
-
-
-
-
-
-        
         
 
 
