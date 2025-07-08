@@ -12,9 +12,8 @@ class Reference extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'designation',   // as per your migration
-        'organization',
         'email',
+        'institution'
     ];
 
     public function user()

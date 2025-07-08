@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
+<!-- Trix Editor CSS -->
+<link rel="stylesheet" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+
 <body>
     <div class="page-container">
         <!-- Header/Navigation -->
@@ -23,5 +26,6 @@
         @include('partials.footer')
     </div>
     <script src="script.js"></script>
+     <script src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 </body>
 </html>

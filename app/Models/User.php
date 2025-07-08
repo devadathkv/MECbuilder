@@ -51,9 +51,10 @@ class User extends Authenticatable
     }
 
     public function skills()
-    {
-        return $this->hasMany(Skill::class);
-    }
+{
+    return $this->hasOne(Skill::class); // 👈 not hasMany
+}
+
 
     public function education()
     {
