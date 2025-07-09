@@ -6,40 +6,42 @@
     <title>Resume</title>
     <style>
         @page {
-            margin: 30px 40px;
+            margin: 25px 35px;
         }
 
         body {
             font-family: DejaVu Sans, sans-serif;
-            font-size: 12px;
-            line-height: 1.5;
+            font-size: 11.5px;
+            line-height: 1.45;
+            color: #000;
         }
 
         h2 {
+            font-size: 13px;
+            text-transform: uppercase;
             border-bottom: 1px solid #000;
-            padding-bottom: 4px;
-            margin-top: 25px;
+            padding-bottom: 3px;
+            margin-top: 22px;
         }
 
         .section {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         ul {
-            padding-left: 20px;
+            padding-left: 18px;
         }
 
         li {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
     </style>
 </head>
 
 <body>
     {{-- HEADER --}}
-    <table width="100%" style="font-family: DejaVu Sans, sans-serif; font-size: 12px;">
+    <table width="100%">
         <tr valign="top">
-            {{-- Left side --}}
             <td align="left" style="width: 60%;">
                 <div style="font-size: 14px; font-weight: bold;">{{ $header->name ?? '' }}</div>
 
@@ -66,7 +68,6 @@
                 @endif
             </td>
 
-            {{-- Right side --}}
             <td align="right" style="width: 40%;">
                 @if ($header->email)
                     <div style="margin-bottom: 2px;">{{ $header->email }}</div>
@@ -91,29 +92,24 @@
         </ul>
     </div>
 
-
-
-    {{-- Education --}}
+    {{-- EDUCATION --}}
     @if ($education && count($education) > 0)
         <div class="section">
             <h2>Education</h2>
             @foreach ($education as $edu)
-                <table width="100%" style="margin-bottom: 12px; font-size: 12px;">
+                <table width="100%" style="margin-bottom: 10px;">
                     <tr>
-                        {{-- Left: Degree, Institution, Location --}}
-                        <td style="width: 70%;">
-                            <strong>{{ $edu->degree }}</strong><br>
+                        <td style="font-weight: bold;">{{ $edu->degree }}</td>
+                        <td align="right">{{ $edu->year }}</td>
+                    </tr>
+                    <tr>
+                        <td>
                             {{ $edu->institution }}<br>
                             @if (!empty($edu->location))
-                                <span style="font-style: italic;">{{ $edu->location }}</span>
+                                <i>{{ $edu->location }}</i>
                             @endif
                         </td>
-
-                        {{-- Right: Year and Grade --}}
-                        <td style="width: 30%; text-align: right;">
-                            <strong>{{ $edu->year }}</strong><br>
-                            <strong>{{ $edu->grade }}</strong>
-                        </td>
+                        <td align="right" style="font-weight: bold;">{{ $edu->grade }}</td>
                     </tr>
                 </table>
             @endforeach
@@ -122,32 +118,37 @@
 
 
 
+
     {{-- Projects --}}
-    <div class="section">
-        <h2 style="border-bottom: 1px solid #000; padding-bottom: 4px; font-size: 13px; text-transform: uppercase;">
-            Projects</h2>
-        <ul style="list-style-position: inside; padding-left: 0; margin: 0;">
+    {{-- PROJECTS --}}
+    @if ($projects && count($projects) > 0)
+        <div class="section">
+            <h2>Projects</h2>
             @foreach ($projects as $project)
-                <li style="margin: 0 0 4px 0; font-size: 10.5pt; line-height: 1.2;">
-                    <div style="display: flex; justify-content: space-between;">
-                        <strong>{{ $project->title }}</strong>
-                        <div style="font-size: 10pt; text-align: right;">
+                <table width="100%" style="margin-bottom: 10px; font-size: 11px;">
+                    <tr>
+                        <td colspan="2" style="font-weight: bold;">{{ $project->title }}</td>
+                        <td align="right" style="font-size: 10pt;">
                             <div><em>Team Size:</em> {{ $project->team_size }}</div>
                             <div>{{ $project->duration }}</div>
-                        </div>
-                    </div>
-                    <div style="font-style: italic;">
-                        {{ $project->role }}
-                    </div>
-                    <div style="font-style: italic;">
-                        <span style="font-weight: normal; color: #444;">Technologies Used:</span>
-                        {{ $project->technologies }}
-                    </div>
-                    <div>{{ $project->description }}</div>
-                </li>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="font-style: italic;">{{ $project->role }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="font-style: italic;">
+                            <span style="font-weight: normal; color: #444;">Technologies Used:</span>
+                            {{ $project->technologies }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">{{ $project->description }}</td>
+                    </tr>
+                </table>
             @endforeach
-        </ul>
-    </div>
+        </div>
+    @endif
 
 
 
@@ -172,22 +173,28 @@
             <h2>Achievements</h2>
             <ul>
                 @foreach ($achievements as $achieve)
-                    <li>{!! $achieve->title !!}</li> {{-- Renders bold/unbold formatting from Trix --}}
+                    <li>{!! $achieve->title !!}</li> {{-- Trix formatting support --}}
                 @endforeach
             </ul>
         </div>
     @endif
 
     {{-- References --}}
-    <div class="section">
-        <h2>References</h2>
-        <ul>
-            @foreach ($references as $ref)
-                <li>{{ $ref->email }} - {{ $ref->position }}</li>
-            @endforeach
-        </ul>
-    </div>
-
+    @if ($references && count($references) > 0)
+        <div class="section">
+            <h2>References</h2>
+            <ul>
+                @foreach ($references as $ref)
+                    <li>
+                        {{ $ref->email }}
+                        @if ($ref->position)
+                            - {{ $ref->position }}
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 </body>
 

@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\Education;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Browsershot\Browsershot;
 
 class MainController extends Controller
 {
@@ -38,23 +39,29 @@ class MainController extends Controller
 
     }
 
-    public function downloadPDF()
+    
+public function downloadPDF()
 {
     $user = auth()->user();
 
     $data = [
-        'header' => $user->header,
-        'skills' => $user->skills,
-        'courses' => $user->courses,  // <-- Make sure this is eager-loaded
-        'achievements' => $user->achievements,
-        'references' => $user->references,
-        'education' => $user->education,
-        'projects' => $user->projects,
+        'header'      => $user->header,
+        'skills'      => $user->skills,
+        'courses'     => $user->courses,
+        'achievements'=> $user->achievements,
+        'references'  => $user->references,
+        'education'   => $user->education,
+        'projects'    => $user->projects,
     ];
 
-    $pdf = Pdf::loadView('mec.pdf.resume', $data)->setPaper('a4');
+    $html = view('mec.pdf.resume', $data)->render();
 
-    return $pdf->download('resume.pdf');
+    return response()->streamDownload(function () use ($html) {
+        echo Browsershot::html($html)
+            ->setOption('no-sandbox', true)
+            ->format('A4')
+            ->pdf();
+    }, 'Devadath_KV_Resume.pdf');
 }
 
 }
