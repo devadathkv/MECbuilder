@@ -50,7 +50,7 @@ public function downloadPDF()
         'courses'     => $user->courses,
         'achievements'=> $user->achievements,
         'references'  => $user->references,
-        'education'   => $user->education,
+        'educations'   => $user->education,
         'projects'    => $user->projects,
     ];
 

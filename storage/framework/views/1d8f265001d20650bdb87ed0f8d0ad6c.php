@@ -426,7 +426,10 @@
             border-radius: 0.375rem;
             font-weight: 500;
             transition: all 0.2s;
+            text-decoration: none;
+
         }
+
 
         .btn-primary:hover {
             background-color: #2563eb;
@@ -434,8 +437,9 @@
 
         .btn-edit {
             background-color: #4b5563;
+            text-decoration: none;
             color: #d1d5db;
-            padding: 0.5rem 1rem;
+            padding: 0.3rem 1rem;
             border-radius: 0.375rem;
             font-weight: 500;
             transition: all 0.2s;
@@ -556,7 +560,7 @@
         }
 
         .education-year {
-            background-color: #1e3a8a;
+            /* background-color: #1e3a8a; */
             color: #bfdbfe;
             font-size: 0.875rem;
             padding: 0.25rem 0.5rem;
@@ -593,7 +597,7 @@
 
         .project-duration {
             /* background-color: #581c87; */
-            color: #d8b4fe;
+            color: #b4c2fe;
             font-size: 0.875rem;
             padding: 0.25rem 0.5rem;
             border-radius: 9999px;

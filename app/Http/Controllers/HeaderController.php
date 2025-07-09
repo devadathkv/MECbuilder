@@ -92,7 +92,9 @@ class HeaderController extends Controller
         'references' => Auth::user()->references,
         'courses' => Auth::user()->courses,
         'skills' => Auth::user()->skills,
-        'education'=>Auth::user()->education,
+        'educations'=>Auth::user()->education,
+        'projects'     => Auth::user()->projects, 
+        'achievements' => Auth::user()->achievements,
     ];
 }
 

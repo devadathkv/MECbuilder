@@ -68,13 +68,13 @@
 
                 <div style="margin-top: 4px;">
                     @if ($header->linkedin)
-                        <a href="{{ $header->linkedin }}" style="color: #000; text-decoration: none;">LinkedIn</a> |
+                        <a href="{{ $header->linkedin }}" style="color: #007bff; text-decoration: none;">LinkedIn</a> |
                     @endif
                     @if ($header->github)
-                        <a href="{{ $header->github }}" style="color: #000; text-decoration: none;">GitHub</a> |
+                        <a href="{{ $header->github }}" style="color: #007bff; text-decoration: none;">GitHub</a> |
                     @endif
                     @if ($header->portfolio)
-                        <a href="{{ $header->portfolio }}" style="color: #000; text-decoration: none;">Portfolio</a>
+                        <a href="{{ $header->portfolio }}" style="color: #007bff; text-decoration: none;">Portfolio</a>
                     @endif
                 </div>
 
@@ -112,10 +112,10 @@
     </div>
 
     {{-- EDUCATION --}}
-    @if ($education && count($education) > 0)
+    @if ($educations && count($educations) > 0)
         <div class="section">
             <h2>EDUCATION</h2>
-            @foreach ($education as $edu)
+            @foreach ($educations as $edu)
                 <table width="100%" style="margin-bottom: 10px;">
                     <tr>
                         <td style="font-weight: bold;">{{ $edu->institution }}</td>
@@ -201,9 +201,9 @@
         </div>
     @endif
 
-    @if ($education && count($education) > 0)
+    @if ($educations && count($educations) > 0)
         <div style="text-align: center; margin-top: 20px;">
-            {{ $education[0]->institution ?? '' }}
+            {{ $educations[0]->institution ?? '' }}
         </div>
     @endif
 </body>

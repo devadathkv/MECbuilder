@@ -68,13 +68,13 @@
 
                 <div style="margin-top: 4px;">
                     <?php if($header->linkedin): ?>
-                        <a href="<?php echo e($header->linkedin); ?>" style="color: #000; text-decoration: none;">LinkedIn</a> |
+                        <a href="<?php echo e($header->linkedin); ?>" style="color: #007bff; text-decoration: none;">LinkedIn</a> |
                     <?php endif; ?>
                     <?php if($header->github): ?>
-                        <a href="<?php echo e($header->github); ?>" style="color: #000; text-decoration: none;">GitHub</a> |
+                        <a href="<?php echo e($header->github); ?>" style="color: #007bff; text-decoration: none;">GitHub</a> |
                     <?php endif; ?>
                     <?php if($header->portfolio): ?>
-                        <a href="<?php echo e($header->portfolio); ?>" style="color: #000; text-decoration: none;">Portfolio</a>
+                        <a href="<?php echo e($header->portfolio); ?>" style="color: #007bff; text-decoration: none;">Portfolio</a>
                     <?php endif; ?>
                 </div>
 
@@ -112,10 +112,10 @@
     </div>
 
     
-    <?php if($education && count($education) > 0): ?>
+    <?php if($educations && count($educations) > 0): ?>
         <div class="section">
             <h2>EDUCATION</h2>
-            <?php $__currentLoopData = $education; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <table width="100%" style="margin-bottom: 10px;">
                     <tr>
                         <td style="font-weight: bold;"><?php echo e($edu->institution); ?></td>
@@ -202,9 +202,9 @@
         </div>
     <?php endif; ?>
 
-    <?php if($education && count($education) > 0): ?>
+    <?php if($educations && count($educations) > 0): ?>
         <div style="text-align: center; margin-top: 20px;">
-            <?php echo e($education[0]->institution ?? ''); ?>
+            <?php echo e($educations[0]->institution ?? ''); ?>
 
         </div>
     <?php endif; ?>
