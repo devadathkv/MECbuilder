@@ -1,11 +1,12 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <style>
         .form-container {
             max-width: 700px;
             margin: 40px auto;
             background-color: #0d1117;
+            /* Darker background */
             padding: 40px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
@@ -76,63 +77,70 @@
             padding-left: 20px;
         }
 
-        textarea.form-control {
-            resize: vertical;
-        }
-
         input::placeholder,
-        textarea::placeholder {
+        input[type="url"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="text"]::placeholder,
+        input[type="date"]::placeholder {
             color: #8b949e;
         }
     </style>
 
-    <div class="form-container">
-        <h2>Add Project</h2>
 
-        @if ($errors->any())
+    <div class="form-container">
+        <h2>Add Header Information</h2>
+
+        <?php if($errors->any()): ?>
             <div class="alert alert-danger">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
 
-        <form action="{{ route('projects.store') }}" method="POST">
-            @csrf
+        <form action="<?php echo e(route('header.store')); ?>" method="POST">
+            <?php echo csrf_field(); ?>
 
             <div class="mb-3">
-                <label for="title" class="form-label">Project Title</label>
-                <input type="text" name="title" id="title" class="form-control" required>
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" name="name" id="name" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="role" class="form-label">Your Role</label>
-                <input type="text" name="role" id="role" class="form-control" required>
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" name="email" id="email" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="technologies" class="form-label">Technologies Used (comma-separated)</label>
-                <input type="text" name="technologies" id="technologies" class="form-control" required>
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" name="phone" id="phone" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="description" class="form-label">Project Description</label>
-                <textarea name="description" id="description" class="form-control" rows="3" required></textarea>
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" name="dob" id="dob" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="team_size" class="form-label">Team Size</label>
-                <input type="number" name="team_size" id="team_size" class="form-control" required>
+                <label for="linkedin" class="form-label">LinkedIn Profile Link</label>
+                <input type="url" name="linkedin" id="linkedin" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="duration" class="form-label">Duration (e.g., "2 Weeks", "1 Month")</label>
-                <input type="text" name="duration" id="duration" class="form-control" required>
+                <label for="github" class="form-label">GitHub Profile Link</label>
+                <input type="url" name="github" id="github" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Save Project</button>
+            <div class="mb-3">
+                <label for="portfolio" class="form-label">Portfolio Link</label>
+                <input type="url" name="portfolio" id="portfolio" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Header</button>
         </form>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resume_builder\resources\views/mec/header/create.blade.php ENDPATH**/ ?>
