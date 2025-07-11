@@ -11,8 +11,8 @@
 
         body {
             font-family: DejaVu Sans, sans-serif;
-            font-size: 11.5px;
-            line-height: 1.3;
+            font-size: 10.7px;
+            line-height: 1.1;
             color: #000;
         }
 
@@ -30,18 +30,35 @@
         }
 
         ul {
+            list-style-position: outside;
+            /* Keep bullet outside the text block */
             padding-left: 16px;
-            margin-top: 0;
-            margin-bottom: 0;
+            /* Controls distance from left edge */
+            margin: 0;
         }
 
         li {
-            margin-bottom: 2px;
+            margin-left: 4px;
+            /* Small extra indent from bullet to text */
+            padding-left: 4px;
+            /* Space between bullet and text */
+            text-indent: 0;
+            /* Ensure no unwanted indent */
+            margin-bottom: 3px;
+            /* Optional: spacing between list items */
+            line-height: 1.3;
+            /* Better readability */
         }
 
         table {
             width: 100%;
-            border-collapse: collapse;
+            bord er-collapse: collapse;
+        }
+
+        pre,
+        code {
+            font-family: inherit;
+            /* Override monospace if used accidentally */
         }
 
 
@@ -57,6 +74,31 @@
         .project-details {
             font-style: italic;
             color: #444;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 16px;
+            /* tighten bullets spacing */
+        }
+
+        ul.aligned-bullets {
+            list-style-type: disc;
+            list-style-position: outside;
+            padding-left: 16px;
+            margin: 0;
+        }
+
+        ul.aligned-bullets li {
+            display: list-item;
+            /* <- Important: keeps the bullet */
+            margin-bottom: 2px;
+            line-height: 1.3;
+        }
+
+        ul.aligned-bullets li .label {
+            min-width: 130px;
+            display: inline-block;
         }
     </style>
 </head>
@@ -86,7 +128,7 @@
                 </div>
 
                 <?php if($header->dob): ?>
-                    <div style="font-size: 12px;">
+                    <div style="font-size: 10px;">
                         DOB –<?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?>
 
                     </div>
@@ -107,76 +149,69 @@
         </tr>
     </table>
     
-    <hr style="border: 2px solid #000; margin: 8px 0 14px 0;">
+    <hr style="border: 2px solid #000; margin: 4px 0 10px 0;">
     
     <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
         <h2
-            style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+            style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 10.5px; font-weight: bold; text-transform: uppercase;">
             SKILLS & INTERESTS
         </h2>
-        <table style="width: 100%; border-collapse: collapse; margin: 0; padding: 0;">
+        <ul class="aligned-bullets">
             <?php if($skills->technical): ?>
-                <tr>
-                    <td style="width: 130px; vertical-align: top; font-weight: bold; padding: 0;">• Technical Skills:
-                    </td>
-                    <td style="padding: 0;"><?php echo e($skills->technical); ?></td>
-                </tr>
+                <li><span class="label"><strong>Technical Skills:</strong></span> <?php echo e($skills->technical); ?></li>
             <?php endif; ?>
             <?php if($skills->soft): ?>
-                <tr>
-                    <td style="width: 130px; vertical-align: top; font-weight: bold; padding: 0;">• Soft Skills:</td>
-                    <td style="padding: 0;"><?php echo e($skills->soft); ?></td>
-                </tr>
+                <li><span class="label"><strong>Soft Skills:</strong></span> <?php echo e($skills->soft); ?></li>
             <?php endif; ?>
             <?php if($skills->interests): ?>
-                <tr>
-                    <td style="width: 130px; vertical-align: top; font-weight: bold; padding: 0;">• Interests:</td>
-                    <td style="padding: 0;"><?php echo e($skills->interests); ?></td>
-                </tr>
+                <li><span class="label"><strong>Interests:</strong></span> <?php echo e($skills->interests); ?></li>
             <?php endif; ?>
-        </table>
+        </ul>
     </div>
+
+
+
     <div style="height: 2px;"></div>
     
     <?php if($educations && count($educations) > 0): ?>
         <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
             <h2
-                style="border-bottom: 0.5px solid #888; margin: 1px 0 3px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 10.5px; font-weight: bold; text-transform: uppercase;">
                 EDUCATION
             </h2>
 
-            <?php $__currentLoopData = $educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <table width="100%" style="margin: 0 0 3px 5px; border-collapse: collapse; font-size: 11.5px;">
-                    <tr>
-                        <td style="font-weight: bold; padding: 0;">
-                            • <?php echo e($edu->institution); ?>
+            <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
+                <?php $__currentLoopData = $educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li style="margin-bottom: 3px; line-height: 1.2;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div>
+                                <strong><?php echo e($edu->institution); ?></strong>
+                                <div>
+                                    <span style="font-weight: bold;"><?php echo e($edu->board); ?></span>, <?php echo e($edu->degree); ?>
 
-                        </td>
-                        <td align="right" style="font-weight: bold; padding: 0;">
-                            <?php echo e($edu->year); ?>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0;">
-                            <span style="font-weight: bold;"><?php echo e($edu->board); ?>,</span> <?php echo e($edu->degree); ?>
-
-                        </td>
-                        <td align="right" style="font-style: italic; padding: 0;"><?php echo e($edu->grade); ?></td>
-                    </tr>
-                </table>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <?php echo e($edu->year); ?><br>
+                                <em><?php echo e($edu->grade); ?></em>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </ul>
         </div>
     <?php endif; ?>
-<div style="height: 2px;"></div>
+
+    <div style="height: 2px;"></div>
 
     
     <?php if($projects && count($projects) > 0): ?>
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
             <h2
-                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 10.5px; font-weight: bold; text-transform: uppercase;">
                 PROJECTS
             </h2>
+
 
             <ul style="padding-left: 15px; margin: 0;">
                 <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -204,12 +239,12 @@
             </ul>
         </div>
     <?php endif; ?>
-<div style="height: 2px;"></div>
+    <div style="height: 2px;"></div>
     
     <?php if($courses && count($courses) > 0): ?>
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
             <h2
-                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 10.5px; font-weight: bold; text-transform: uppercase;">
                 COURSES & CERTIFICATIONS
             </h2>
 
@@ -220,16 +255,15 @@
             </ul>
         </div>
     <?php endif; ?>
-<div style="height: 2px;"></div>
+    <div style="height: 2px;"></div>
 
     
     <?php if($achievements && count($achievements) > 0): ?>
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
             <h2
-                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 10.5px; font-weight: bold; text-transform: uppercase;">
                 ACHIEVEMENTS & ACTIVITIES
             </h2>
-
             <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
                 <?php $__currentLoopData = $achievements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $achieve): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li style="margin-bottom: 2px; line-height: 1.2;"><?php echo $achieve->title; ?></li>
@@ -238,14 +272,15 @@
         </div>
     <?php endif; ?>
 
-<div style="height: 2px;"></div>
+    <div style="height: 2px;"></div>
     
     <?php if($references && count($references) > 0): ?>
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
             <h2
-                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 10.5px; font-weight: bold; text-transform: uppercase;">
                 REFERENCES
             </h2>
+
 
             <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
                 <?php $__currentLoopData = $references; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
