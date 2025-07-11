@@ -100,6 +100,18 @@
             min-width: 130px;
             display: inline-block;
         }
+
+        @media print {
+            .resume-footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                color: #000;
+                font-size: 11px;
+                padding: 8px 0;
+            }
+        }
     </style>
 </head>
 
@@ -118,16 +130,18 @@
                         <a href="{{ $header->linkedin }}" style="color: #007bff; text-decoration: none;">LinkedIn</a>
                     @endif
                     @if ($header->github)
-                        | <a href="{{ $header->github }}" style="color: #007bff; text-decoration: none;">GitHub</a>
+                        <span style="color: #000;"> | </span>
+                        <a href="{{ $header->github }}" style="color: #007bff; text-decoration: none;">GitHub</a>
                     @endif
                     @if ($header->portfolio)
-                        | <a href="{{ $header->portfolio }}"
-                            style="color: #007bff; text-decoration: none;">Portfolio</a>
+                        <span style="color: #000;"> | </span>
+                        <a href="{{ $header->portfolio }}" style="color: #007bff; text-decoration: none;">Portfolio</a>
                     @endif
                 </div>
 
+
                 @if ($header->dob)
-                    <div style="font-size: 10px;">
+                    <div style="font-size: 12px;">
                         DOB –{{ \Carbon\Carbon::parse($header->dob)->format('d/m/Y') }}
                     </div>
                 @endif
@@ -217,7 +231,7 @@
                                 <strong><em>{{ $project->role }}</em></strong>
                             </div>
                             <div style="text-align: right; line-height: 1.2;">
-                                <em>TeamSize:</em> {{ $project->team_size }}<br>
+                                <strong><em>TeamSize:</em></strong> {{ $project->team_size }}<br>
                                 <em>{{ $project->duration }}</em>
                             </div>
                         </div>
@@ -288,6 +302,11 @@
             </ul>
         </div>
     @endif
+
+    <div class="resume-footer">
+        Govt. Model Engineering College, Kochi
+    </div>
+
 
 
 </body>

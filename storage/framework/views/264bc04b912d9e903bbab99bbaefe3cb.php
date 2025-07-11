@@ -100,6 +100,18 @@
             min-width: 130px;
             display: inline-block;
         }
+
+        @media print {
+            .resume-footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                text-align: center;
+                color: #000;
+                font-size: 11px;
+                padding: 8px 0;
+            }
+        }
     </style>
 </head>
 
@@ -119,16 +131,18 @@
                         <a href="<?php echo e($header->linkedin); ?>" style="color: #007bff; text-decoration: none;">LinkedIn</a>
                     <?php endif; ?>
                     <?php if($header->github): ?>
-                        | <a href="<?php echo e($header->github); ?>" style="color: #007bff; text-decoration: none;">GitHub</a>
+                        <span style="color: #000;"> | </span>
+                        <a href="<?php echo e($header->github); ?>" style="color: #007bff; text-decoration: none;">GitHub</a>
                     <?php endif; ?>
                     <?php if($header->portfolio): ?>
-                        | <a href="<?php echo e($header->portfolio); ?>"
-                            style="color: #007bff; text-decoration: none;">Portfolio</a>
+                        <span style="color: #000;"> | </span>
+                        <a href="<?php echo e($header->portfolio); ?>" style="color: #007bff; text-decoration: none;">Portfolio</a>
                     <?php endif; ?>
                 </div>
 
+
                 <?php if($header->dob): ?>
-                    <div style="font-size: 10px;">
+                    <div style="font-size: 12px;">
                         DOB –<?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?>
 
                     </div>
@@ -222,7 +236,7 @@
                                 <strong><em><?php echo e($project->role); ?></em></strong>
                             </div>
                             <div style="text-align: right; line-height: 1.2;">
-                                <em>TeamSize:</em> <?php echo e($project->team_size); ?><br>
+                                <strong><em>TeamSize:</em></strong> <?php echo e($project->team_size); ?><br>
                                 <em><?php echo e($project->duration); ?></em>
                             </div>
                         </div>
@@ -297,6 +311,11 @@
             </ul>
         </div>
     <?php endif; ?>
+
+    <div class="resume-footer">
+        Govt. Model Engineering College, Kochi
+    </div>
+
 
 
 </body>

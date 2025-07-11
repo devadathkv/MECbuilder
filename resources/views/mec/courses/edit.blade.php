@@ -1,55 +1,88 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto mt-8 max-w-lg bg-gray-900 text-white rounded-2xl shadow-lg p-6">
-        <h2 class="text-2xl font-bold mb-4 text-center text-blue-400">Edit Course</h2>
+    <style>
+        .form-container {
+            max-width: 700px;
+            margin: 40px auto;
+            background-color: #0d1117;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #c9d1d9;
+        }
 
-        <form action="{{ route('courses.update', $course->id) }}" method="POST" class="space-y-4">
+        .form-container h2 {
+            margin-bottom: 30px;
+            color: #58a6ff;
+            text-align: center;
+            border-bottom: 2px solid #58a6ff;
+            padding-bottom: 10px;
+        }
+
+        .btn-primary {
+            background-color: #238636;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #2ea043;
+        }
+
+        /* Dark mode adjustments for Trix editor */
+        .trix-content {
+            background-color: #161b22;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .trix-button-group button {
+            background-color: #30363d;
+            color: #c9d1d9;
+        }
+
+        .trix-button-group button.trix-active {
+            background-color: #58a6ff;
+            color: #ffffff;
+        }
+
+        .trix-toolbar {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+        }
+    </style>
+
+    {{-- Trix Editor CSS & JS --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.js"></script>
+
+    <div class="form-container">
+        <h2>Edit Course</h2>
+
+        <form action="{{ route('courses.update', $course->id) }}" method="POST">
             @csrf
             @method('PUT')
 
-            <div class="form-group">
-                <label for="title" class="block text-sm font-semibold text-gray-300 mb-2">Course / Certification</label>
+            <div class="mb-3">
+                <label for="title" class="form-label">Course / Certification</label>
                 <input id="title" type="hidden" name="title" value="{{ old('title', $course->title) }}">
-                <trix-editor input="title"
-                    class="trix-content bg-gray-800 text-gray-200 border border-gray-700 rounded-lg focus:ring focus:ring-blue-500"></trix-editor>
+                <trix-editor input="title" class="trix-content"></trix-editor>
                 @error('title')
                     <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                 @enderror
             </div>
 
-            <button type="submit"
-                class="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-                Update
-            </button>
+            <button type="submit" class="btn-primary">Update Course</button>
         </form>
     </div>
 @endsection
-
-@push('scripts')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.js"></script>
-
-    <style>
-        /* Dark mode adjustments for Trix editor */
-        .trix-content {
-            background-color: #1f2937;
-            /* gray-800 */
-            color: #e5e7eb;
-            /* gray-200 */
-        }
-
-        .trix-button-group button {
-            background-color: #374151;
-            /* gray-700 */
-            color: #f3f4f6;
-            /* gray-100 */
-        }
-
-        .trix-button-group button.trix-active {
-            background-color: #2563eb;
-            /* blue-600 */
-            color: white;
-        }
-    </style>
-@endpush
