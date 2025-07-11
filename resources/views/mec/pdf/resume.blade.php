@@ -12,7 +12,7 @@
         body {
             font-family: DejaVu Sans, sans-serif;
             font-size: 11.5px;
-            line-height: 1.45;
+            line-height: 1.3;
             color: #000;
         }
 
@@ -20,23 +20,23 @@
             font-size: 13px;
             text-transform: uppercase;
             border-bottom: 1px solid #000;
-            padding-bottom: 3px;
-            margin-top: 22px;
-            margin-bottom: 8px;
+            padding-bottom: 1px;
+            margin-top: 17px;
+            margin-bottom: 6px;
         }
 
         .section {
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
 
         ul {
-            padding-left: 18px;
+            padding-left: 16px;
             margin-top: 0;
             margin-bottom: 0;
         }
 
         li {
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         table {
@@ -63,41 +63,45 @@
 
 <body>
     {{-- HEADER --}}
-    <table width="100%" style="margin-bottom: 10px;">
-        <tr valign="top">
-            <td align="left" style="width: 60%;">
-                <div style="font-size: 20px; font-weight: bold;">{{ $header->name ?? '' }}</div>
+    <table width="100%" style="font-family: Arial, sans-serif; margin-bottom: 5px;">
+        <tr>
+            <!-- Left Side: Name, Links, DOB -->
+            <td style="text-align: left; vertical-align: top;">
+                <div style="font-size: 20px; font-weight: bold; margin-bottom: 2px;">
+                    {{ $header->name ?? '' }}
+                </div>
 
-                <div style="margin-top: 4px; font-size: 12px;">
+                <div style="font-size: 12px; color: #007bff; margin-bottom: 2px;">
                     @if ($header->linkedin)
-                        <a href="{{ $header->linkedin }}" style="color: #007bff; text-decoration: none;">LinkedIn</a> |
+                        <a href="{{ $header->linkedin }}" style="color: #007bff; text-decoration: none;">LinkedIn</a>
                     @endif
                     @if ($header->github)
-                        <a href="{{ $header->github }}" style="color: #007bff; text-decoration: none;">GitHub</a> |
+                        | <a href="{{ $header->github }}" style="color: #007bff; text-decoration: none;">GitHub</a>
                     @endif
                     @if ($header->portfolio)
-                        <a href="{{ $header->portfolio }}" style="color: #007bff; text-decoration: none;">Portfolio</a>
+                        | <a href="{{ $header->portfolio }}"
+                            style="color: #007bff; text-decoration: none;">Portfolio</a>
                     @endif
                 </div>
 
                 @if ($header->dob)
-                    <div style="margin-top: 5px; font-size: 12px;">
+                    <div style="font-size: 12px;">
                         <strong>DOB –</strong> {{ \Carbon\Carbon::parse($header->dob)->format('d/m/Y') }}
                     </div>
                 @endif
             </td>
 
-            <td align="right" style="width: 40%;">
-                @if ($header->email)
-                    <div style="margin-bottom: 2px; font-size: 12px;">{{ $header->email }}</div>
-                @endif
-                @if ($header->phone)
-                    <div style="font-size: 12px;">{{ $header->phone }}</div>
-                @endif
+            <!-- Right Side: Email and Phone - now vertically padded -->
+            <td style="text-align: right; vertical-align: top; padding-top: 30px;">
+                <div style="font-size: 12px; margin-bottom: 2px;">
+                    {{ $header->email ?? '' }}
+                </div>
+                <div style="font-size: 12px;">
+                    {{ $header->phone ?? '' }}
+                </div>
             </td>
         </tr>
     </table>
-
     {{-- Thick Divider Below Header --}}
     <hr style="border: 2px solid #000; margin: 8px 0 14px 0;">
 
@@ -129,7 +133,7 @@
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">EDUCATION</h2>
             <ul style="list-style-type: disc; padding-left: 20px;">
                 @foreach ($educations as $edu)
-                    <li style="margin-bottom: 10px;">
+                    <li style="margin-bottom: 6px;">
                         <table width="100%">
                             <tr>
                                 <td style="font-weight: bold;">{{ $edu->institution }}</td>
@@ -154,7 +158,7 @@
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">PROJECTS</h2>
             <ul style="padding-left: 15px;">
                 @foreach ($projects as $project)
-                    <li style="margin-bottom: 10px;">
+                    <li style="margin-bottom: 6px;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <strong>{{ $project->title }}</strong><br>
@@ -179,46 +183,47 @@
     {{-- COURSES & CERTIFICATIONS --}}
     @if ($courses && count($courses) > 0)
         <div class="section">
-            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">COURSES & CERTIFICATIONS
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">
+                COURSES & CERTIFICATIONS
             </h2>
-            <ul style="list-style-type: none; padding-left: 0;">
+            <ul style="list-style-type: disc; padding-left: 20px; margin: 0;">
                 @foreach ($courses as $course)
-                    <li>- {{ $course->title }}</li>
+                    <li>{!! $course->title !!}</li>
                 @endforeach
             </ul>
         </div>
     @endif
+
     {{-- ACHIEVEMENTS & ACTIVITIES --}}
     @if ($achievements && count($achievements) > 0)
         <div class="section">
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">ACHIEVEMENTS & ACTIVITIES
             </h2>
-            <ul style="list-style-type: none; padding-left: 0;">
+            <ul style="list-style-type: disc; padding-left: 20px;">
                 @foreach ($achievements as $achieve)
-                    <li>- {!! $achieve->title !!}</li>
+                    <li>{!! $achieve->title !!}</li>
                 @endforeach
             </ul>
         </div>
     @endif
+
     {{-- REFERENCES --}}
     @if ($references && count($references) > 0)
         <div class="section">
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">REFERENCES</h2>
-            <ul style="list-style-type: none; padding-left: 0;">
+            <ul style="list-style-type: disc; padding-left: 20px;">
                 @foreach ($references as $ref)
-                    <li>
-                        {{ $ref->name }}, {{ $ref->position }}, {{ $ref->institution }}, Email:
-                        {{ $ref->email }}
+                    <li style="margin-bottom: 6px;">
+                        <strong>{{ $ref->name }}</strong>,
+                        {{ $ref->position }},
+                        {{ $ref->institution }},
+                        Email ID: <a href="mailto:{{ $ref->email }}">{{ $ref->email }}</a>
                     </li>
                 @endforeach
             </ul>
         </div>
     @endif
-    @if ($educations && count($educations) > 0)
-        <div style="text-align: center; margin-top: 20px;">
-            {{ $educations[0]->institution ?? '' }}
-        </div>
-    @endif
+
 </body>
 
 </html>

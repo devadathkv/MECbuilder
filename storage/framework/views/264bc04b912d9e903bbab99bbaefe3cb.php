@@ -12,7 +12,7 @@
         body {
             font-family: DejaVu Sans, sans-serif;
             font-size: 11.5px;
-            line-height: 1.45;
+            line-height: 1.3;
             color: #000;
         }
 
@@ -20,23 +20,23 @@
             font-size: 13px;
             text-transform: uppercase;
             border-bottom: 1px solid #000;
-            padding-bottom: 3px;
-            margin-top: 22px;
-            margin-bottom: 8px;
+            padding-bottom: 1px;
+            margin-top: 17px;
+            margin-bottom: 6px;
         }
 
         .section {
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
 
         ul {
-            padding-left: 18px;
+            padding-left: 16px;
             margin-top: 0;
             margin-bottom: 0;
         }
 
         li {
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         table {
@@ -63,42 +63,49 @@
 
 <body>
     
-    <table width="100%" style="margin-bottom: 10px;">
-        <tr valign="top">
-            <td align="left" style="width: 60%;">
-                <div style="font-size: 20px; font-weight: bold;"><?php echo e($header->name ?? ''); ?></div>
+    <table width="100%" style="font-family: Arial, sans-serif; margin-bottom: 5px;">
+        <tr>
+            <!-- Left Side: Name, Links, DOB -->
+            <td style="text-align: left; vertical-align: top;">
+                <div style="font-size: 20px; font-weight: bold; margin-bottom: 2px;">
+                    <?php echo e($header->name ?? ''); ?>
 
-                <div style="margin-top: 4px; font-size: 12px;">
+                </div>
+
+                <div style="font-size: 12px; color: #007bff; margin-bottom: 2px;">
                     <?php if($header->linkedin): ?>
-                        <a href="<?php echo e($header->linkedin); ?>" style="color: #007bff; text-decoration: none;">LinkedIn</a> |
+                        <a href="<?php echo e($header->linkedin); ?>" style="color: #007bff; text-decoration: none;">LinkedIn</a>
                     <?php endif; ?>
                     <?php if($header->github): ?>
-                        <a href="<?php echo e($header->github); ?>" style="color: #007bff; text-decoration: none;">GitHub</a> |
+                        | <a href="<?php echo e($header->github); ?>" style="color: #007bff; text-decoration: none;">GitHub</a>
                     <?php endif; ?>
                     <?php if($header->portfolio): ?>
-                        <a href="<?php echo e($header->portfolio); ?>" style="color: #007bff; text-decoration: none;">Portfolio</a>
+                        | <a href="<?php echo e($header->portfolio); ?>"
+                            style="color: #007bff; text-decoration: none;">Portfolio</a>
                     <?php endif; ?>
                 </div>
 
                 <?php if($header->dob): ?>
-                    <div style="margin-top: 5px; font-size: 12px;">
+                    <div style="font-size: 12px;">
                         <strong>DOB –</strong> <?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?>
 
                     </div>
                 <?php endif; ?>
             </td>
 
-            <td align="right" style="width: 40%;">
-                <?php if($header->email): ?>
-                    <div style="margin-bottom: 2px; font-size: 12px;"><?php echo e($header->email); ?></div>
-                <?php endif; ?>
-                <?php if($header->phone): ?>
-                    <div style="font-size: 12px;"><?php echo e($header->phone); ?></div>
-                <?php endif; ?>
+            <!-- Right Side: Email and Phone - now vertically padded -->
+            <td style="text-align: right; vertical-align: top; padding-top: 30px;">
+                <div style="font-size: 12px; margin-bottom: 2px;">
+                    <?php echo e($header->email ?? ''); ?>
+
+                </div>
+                <div style="font-size: 12px;">
+                    <?php echo e($header->phone ?? ''); ?>
+
+                </div>
             </td>
         </tr>
     </table>
-
     
     <hr style="border: 2px solid #000; margin: 8px 0 14px 0;">
 
@@ -133,7 +140,7 @@
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">EDUCATION</h2>
             <ul style="list-style-type: disc; padding-left: 20px;">
                 <?php $__currentLoopData = $educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li style="margin-bottom: 10px;">
+                    <li style="margin-bottom: 6px;">
                         <table width="100%">
                             <tr>
                                 <td style="font-weight: bold;"><?php echo e($edu->institution); ?></td>
@@ -159,7 +166,7 @@
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">PROJECTS</h2>
             <ul style="padding-left: 15px;">
                 <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li style="margin-bottom: 10px;">
+                    <li style="margin-bottom: 6px;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 <strong><?php echo e($project->title); ?></strong><br>
@@ -187,48 +194,47 @@
     
     <?php if($courses && count($courses) > 0): ?>
         <div class="section">
-            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">COURSES & CERTIFICATIONS
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">
+                COURSES & CERTIFICATIONS
             </h2>
-            <ul style="list-style-type: none; padding-left: 0;">
+            <ul style="list-style-type: disc; padding-left: 20px; margin: 0;">
                 <?php $__currentLoopData = $courses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li>- <?php echo e($course->title); ?></li>
+                    <li><?php echo $course->title; ?></li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
         </div>
     <?php endif; ?>
+
     
     <?php if($achievements && count($achievements) > 0): ?>
         <div class="section">
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">ACHIEVEMENTS & ACTIVITIES
             </h2>
-            <ul style="list-style-type: none; padding-left: 0;">
+            <ul style="list-style-type: disc; padding-left: 20px;">
                 <?php $__currentLoopData = $achievements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $achieve): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li>- <?php echo $achieve->title; ?></li>
+                    <li><?php echo $achieve->title; ?></li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
         </div>
     <?php endif; ?>
+
     
     <?php if($references && count($references) > 0): ?>
         <div class="section">
             <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">REFERENCES</h2>
-            <ul style="list-style-type: none; padding-left: 0;">
+            <ul style="list-style-type: disc; padding-left: 20px;">
                 <?php $__currentLoopData = $references; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <li>
-                        <?php echo e($ref->name); ?>, <?php echo e($ref->position); ?>, <?php echo e($ref->institution); ?>, Email:
-                        <?php echo e($ref->email); ?>
-
+                    <li style="margin-bottom: 6px;">
+                        <strong><?php echo e($ref->name); ?></strong>,
+                        <?php echo e($ref->position); ?>,
+                        <?php echo e($ref->institution); ?>,
+                        Email ID: <a href="mailto:<?php echo e($ref->email); ?>"><?php echo e($ref->email); ?></a>
                     </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
         </div>
     <?php endif; ?>
-    <?php if($educations && count($educations) > 0): ?>
-        <div style="text-align: center; margin-top: 20px;">
-            <?php echo e($educations[0]->institution ?? ''); ?>
 
-        </div>
-    <?php endif; ?>
 </body>
 
 </html>
