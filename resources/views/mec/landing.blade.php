@@ -151,6 +151,7 @@
                                 <div>
                                     <h4 class="education-degree">{{ $education->degree }}</h4>
                                     <p class="education-institution">{{ $education->institution }}</p>
+                                    <p class="education-board">{{ $education->board }}</p>
                                 </div>
                                 <div class="education-year">{{ $education->year }}</div>
                             </div>

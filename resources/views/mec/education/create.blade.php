@@ -18,23 +18,28 @@
             @csrf
 
             <div class="mb-3">
-                <label for="degree" class="form-label">Institute : </label>
+                <label for="degree" class="form-label">Degree/Course :</label>
                 <input type="text" name="degree" id="degree" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="institution" class="form-label">Education : </label>
+                <label for="institution" class="form-label">Institution :</label>
                 <input type="text" name="institution" id="institution" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="year" class="form-label">Year of Completion</label>
+                <label for="board" class="form-label">Board/University :</label>
+                <input type="text" name="board" id="board" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="year" class="form-label">Year of Completion :</label>
                 <input type="number" name="year" id="year" class="form-control" min="1900"
                     max="{{ now()->year }}" required>
             </div>
 
             <div class="mb-3">
-                <label for="grade" class="form-label">Grade/Percentage</label>
+                <label for="grade" class="form-label">Grade/Percentage :</label>
                 <input type="text" name="grade" id="grade" class="form-control" required>
             </div>
 

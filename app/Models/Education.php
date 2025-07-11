@@ -13,6 +13,7 @@ class Education extends Model
         'user_id',
         'degree',
         'institution',
+        'board',
         'year',
         'grade',
     ];

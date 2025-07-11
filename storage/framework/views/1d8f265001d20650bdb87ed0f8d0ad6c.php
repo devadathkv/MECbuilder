@@ -151,6 +151,7 @@
                                 <div>
                                     <h4 class="education-degree"><?php echo e($education->degree); ?></h4>
                                     <p class="education-institution"><?php echo e($education->institution); ?></p>
+                                    <p class="education-board"><?php echo e($education->board); ?></p>
                                 </div>
                                 <div class="education-year"><?php echo e($education->year); ?></div>
                             </div>

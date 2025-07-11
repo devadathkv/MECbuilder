@@ -16,10 +16,12 @@ class EducationController extends Controller
 
     public function store(Request $request)
     { 
+        $maxYear = now()->year;
         $data = $request->validate([
             'degree' => 'required|string|max:255',
             'institution' => 'required|string|max:255',
-            'year' => 'required|integer|min:1900|max:' . now()->year,
+            'board' => 'required|string|max:255',
+            'year' => "required|integer|min:1900|max:$maxYear",
             'grade' => 'required|string|max:255',
         ]);
 
@@ -39,11 +41,12 @@ public function edit($id)
 public function update(Request $request, $id)
 {
     $education = Education::where('user_id', Auth::id())->findOrFail($id);
-
+    $maxYear = now()->year;
     $data = $request->validate([
         'degree' => 'required|string|max:255',
         'institution' => 'required|string|max:255',
-        'year' => 'required|integer|min:1900|max:' . now()->year,
+        'board' => 'required|string|max:255',
+        'year' => "required|integer|min:1900|max:$maxYear",
         'grade' => 'required|string|max:100',
     ]);
 
