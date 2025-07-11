@@ -86,7 +86,7 @@
 
                 @if ($header->dob)
                     <div style="font-size: 12px;">
-                        <strong>DOB –</strong> {{ \Carbon\Carbon::parse($header->dob)->format('d/m/Y') }}
+                        DOB –{{ \Carbon\Carbon::parse($header->dob)->format('d/m/Y') }}
                     </div>
                 @endif
             </td>
@@ -104,75 +104,90 @@
     </table>
     {{-- Thick Divider Below Header --}}
     <hr style="border: 2px solid #000; margin: 8px 0 14px 0;">
-
     {{-- SKILLS & INTERESTS --}}
-    <div class="section" style="margin-bottom: 15px;">
-        <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">SKILLS & INTERESTS</h2>
-
-        <ul style="list-style-type: disc; padding-left: 20px; margin-top: 5px;">
+    <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
+        <h2
+            style="border-bottom: 0.5px solid #000; margin: 1px 0 2px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+            SKILLS & INTERESTS
+        </h2>
+        <table style="width: 100%; border-collapse: collapse; margin: 0; padding: 0;">
             @if ($skills->technical)
-                <li style="margin-bottom: 4px;">
-                    <strong>Technical Skills:</strong> {{ $skills->technical }}
-                </li>
+                <tr>
+                    <td style="width: 130px; vertical-align: top; font-weight: bold; padding: 0;">• Technical Skills:
+                    </td>
+                    <td style="padding: 0;">{{ $skills->technical }}</td>
+                </tr>
             @endif
             @if ($skills->soft)
-                <li style="margin-bottom: 4px;">
-                    <strong>Soft Skills:</strong> {{ $skills->soft }}
-                </li>
+                <tr>
+                    <td style="width: 130px; vertical-align: top; font-weight: bold; padding: 0;">• Soft Skills:</td>
+                    <td style="padding: 0;">{{ $skills->soft }}</td>
+                </tr>
             @endif
             @if ($skills->interests)
-                <li>
-                    <strong>Interests:</strong> {{ $skills->interests }}
-                </li>
+                <tr>
+                    <td style="width: 130px; vertical-align: top; font-weight: bold; padding: 0;">• Interests:</td>
+                    <td style="padding: 0;">{{ $skills->interests }}</td>
+                </tr>
             @endif
-        </ul>
+        </table>
     </div>
+    <div style="height: 2px;"></div>
     {{-- EDUCATION --}}
     @if ($educations && count($educations) > 0)
-        <div class="section">
-            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">EDUCATION</h2>
-            <ul style="list-style-type: disc; padding-left: 20px;">
-                @foreach ($educations as $edu)
-                    <li style="margin-bottom: 6px;">
-                        <table width="100%">
-                            <tr>
-                                <td style="font-weight: bold;">{{ $edu->institution }}</td>
-                                <td align="right">{{ $edu->year }}</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span style="font-weight: bold;">{{ $edu->board }}</span>
-                                    {{ $edu->degree }}
-                                </td>
-                                <td align="right" style="font-weight: bold;">{{ $edu->grade }}</td>
-                            </tr>
-                        </table>
-                    </li>
-                @endforeach
-            </ul>
+        <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
+            <h2
+                style="border-bottom: 0.5px solid #888; margin: 1px 0 3px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                EDUCATION
+            </h2>
+
+            @foreach ($educations as $edu)
+                <table width="100%" style="margin: 0 0 3px 5px; border-collapse: collapse; font-size: 11.5px;">
+                    <tr>
+                        <td style="font-weight: bold; padding: 0;">
+                            • {{ $edu->institution }}
+                        </td>
+                        <td align="right" style="font-weight: bold; padding: 0;">
+                            {{ $edu->year }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0;">
+                            <span style="font-weight: bold;">{{ $edu->board }},</span> {{ $edu->degree }}
+                        </td>
+                        <td align="right" style="font-style: italic; padding: 0;">{{ $edu->grade }}</td>
+                    </tr>
+                </table>
+            @endforeach
         </div>
     @endif
+<div style="height: 2px;"></div>
+
     {{-- PROJECTS --}}
     @if ($projects && count($projects) > 0)
-        <div class="section">
-            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">PROJECTS</h2>
-            <ul style="padding-left: 15px;">
+        <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
+            <h2
+                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                PROJECTS
+            </h2>
+
+            <ul style="padding-left: 15px; margin: 0;">
                 @foreach ($projects as $project)
-                    <li style="margin-bottom: 6px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
+                    <li style="margin-bottom: 3px;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div style="line-height: 1.2;">
                                 <strong>{{ $project->title }}</strong><br>
                                 <em>{{ $project->role }}</em>
                             </div>
-                            <div style="text-align: right;">
+                            <div style="text-align: right; line-height: 1.2;">
                                 <em>TeamSize:</em> {{ $project->team_size }}<br>
-                                {{ $project->duration }}
+                                <em>{{ $project->duration }}</em>
                             </div>
                         </div>
-                        <div style="font-style: italic; color: #333; margin-top: 2px;">
+                        <div style="font-style: italic; color: #333; margin-top: 1px; line-height: 1.2;">
                             Technologies Used: {{ $project->technologies }}
                         </div>
-                        <div style="margin-top: 2px;">
+                        <div style="margin-top: 1px; line-height: 1.2;">
                             {{ $project->description }}
                         </div>
                     </li>
@@ -180,49 +195,64 @@
             </ul>
         </div>
     @endif
+<div style="height: 2px;"></div>
     {{-- COURSES & CERTIFICATIONS --}}
     @if ($courses && count($courses) > 0)
-        <div class="section">
-            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">
+        <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
+            <h2
+                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
                 COURSES & CERTIFICATIONS
             </h2>
-            <ul style="list-style-type: disc; padding-left: 20px; margin: 0;">
+
+            <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
                 @foreach ($courses as $course)
-                    <li>{!! $course->title !!}</li>
+                    <li style="margin-bottom: 2px; line-height: 1.2;">{!! $course->title !!}</li>
                 @endforeach
             </ul>
         </div>
     @endif
+<div style="height: 2px;"></div>
 
     {{-- ACHIEVEMENTS & ACTIVITIES --}}
     @if ($achievements && count($achievements) > 0)
-        <div class="section">
-            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">ACHIEVEMENTS & ACTIVITIES
+        <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
+            <h2
+                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                ACHIEVEMENTS & ACTIVITIES
             </h2>
-            <ul style="list-style-type: disc; padding-left: 20px;">
+
+            <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
                 @foreach ($achievements as $achieve)
-                    <li>{!! $achieve->title !!}</li>
+                    <li style="margin-bottom: 2px; line-height: 1.2;">{!! $achieve->title !!}</li>
                 @endforeach
             </ul>
         </div>
     @endif
 
+<div style="height: 2px;"></div>
     {{-- REFERENCES --}}
     @if ($references && count($references) > 0)
-        <div class="section">
-            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">REFERENCES</h2>
-            <ul style="list-style-type: disc; padding-left: 20px;">
+        <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
+            <h2
+                style="border-bottom: 0.5px solid #888; margin: 2px 0 4px 0; font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                REFERENCES
+            </h2>
+
+            <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
                 @foreach ($references as $ref)
-                    <li style="margin-bottom: 6px;">
+                    <li style="margin-bottom: 2px; line-height: 1.2;">
                         <strong>{{ $ref->name }}</strong>,
                         {{ $ref->position }},
                         {{ $ref->institution }},
-                        Email ID: <a href="mailto:{{ $ref->email }}">{{ $ref->email }}</a>
+                        Email ID: <a href="mailto:{{ $ref->email }}" style="color: #000; text-decoration: none;">
+                            {{ $ref->email }}
+                        </a>
                     </li>
                 @endforeach
             </ul>
         </div>
     @endif
+
 
 </body>
 

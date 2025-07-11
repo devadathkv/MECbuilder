@@ -18,11 +18,6 @@
             <?php echo csrf_field(); ?>
 
             <div class="mb-3">
-                <label for="degree" class="form-label">Degree/Course :</label>
-                <input type="text" name="degree" id="degree" class="form-control" required>
-            </div>
-
-            <div class="mb-3">
                 <label for="institution" class="form-label">Institution :</label>
                 <input type="text" name="institution" id="institution" class="form-control" required>
             </div>
@@ -31,6 +26,12 @@
                 <label for="board" class="form-label">Board/University :</label>
                 <input type="text" name="board" id="board" class="form-control" required>
             </div>
+
+            <div class="mb-3">
+                <label for="degree" class="form-label">Degree/Course :</label>
+                <input type="text" name="degree" id="degree" class="form-control" required>
+            </div>
+
 
             <div class="mb-3">
                 <label for="year" class="form-label">Year of Completion :</label>
