@@ -7,12 +7,12 @@
             <div class="hero-content">
                 <h1 class="hero-title">
                     <span class="title-line">Craft the Perfect</span>
-                    <span class="title-highlight">AI-Generated Resume</span>
+                    <span class="title-highlight">Resume</span>
                     <span class="title-line">in Minutes</span>
                 </h1>
                 <p class="hero-subtitle">Let our AI help you create a professional resume that gets you hired</p>
                 <div class="hero-cta">
-                    <a href="#features" class="cta-btn primary">Try For Free</a>
+                    {{-- <a href="#features" class="cta-btn primary">Try For Free</a> --}}
                     <a href="{{ route('register') }}" class="cta-btn secondary">Get Started</a>
                 </div>
             </div>
@@ -37,15 +37,15 @@
     <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">Why Choose ResumeGenius</h2>
+            <h2 class="section-title">Why Choose MECbuilder</h2>
             <div class="features-grid">
-                <div class="feature-card">
+                {{-- <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-robot"></i>
                     </div>
                     <h3 class="feature-title">AI-Powered</h3>
                     <p class="feature-desc">Our AI analyzes thousands of successful resumes to craft yours.</p>
-                </div>
+                </div> --}}
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-magic"></i>

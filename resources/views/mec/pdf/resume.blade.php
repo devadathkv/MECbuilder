@@ -44,7 +44,9 @@
             border-collapse: collapse;
         }
 
-        .project-table {
+
+
+        */ .project-table {
             margin-bottom: 12px;
         }
 
@@ -61,12 +63,12 @@
 
 <body>
     {{-- HEADER --}}
-    <table width="100%">
+    <table width="100%" style="margin-bottom: 10px;">
         <tr valign="top">
             <td align="left" style="width: 60%;">
-                <div style="font-size: 14px; font-weight: bold;">{{ $header->name ?? '' }}</div>
+                <div style="font-size: 20px; font-weight: bold;">{{ $header->name ?? '' }}</div>
 
-                <div style="margin-top: 4px;">
+                <div style="margin-top: 4px; font-size: 12px;">
                     @if ($header->linkedin)
                         <a href="{{ $header->linkedin }}" style="color: #007bff; text-decoration: none;">LinkedIn</a> |
                     @endif
@@ -79,93 +81,106 @@
                 </div>
 
                 @if ($header->dob)
-                    <div style="margin-top: 5px;"><strong>DOB –</strong>
-                        {{ \Carbon\Carbon::parse($header->dob)->format('d/m/Y') }}</div>
+                    <div style="margin-top: 5px; font-size: 12px;">
+                        <strong>DOB –</strong> {{ \Carbon\Carbon::parse($header->dob)->format('d/m/Y') }}
+                    </div>
                 @endif
             </td>
 
             <td align="right" style="width: 40%;">
                 @if ($header->email)
-                    <div style="margin-bottom: 2px;">{{ $header->email }}</div>
+                    <div style="margin-bottom: 2px; font-size: 12px;">{{ $header->email }}</div>
                 @endif
                 @if ($header->phone)
-                    <div>{{ $header->phone }}</div>
+                    <div style="font-size: 12px;">{{ $header->phone }}</div>
                 @endif
             </td>
         </tr>
     </table>
 
+    {{-- Thick Divider Below Header --}}
+    <hr style="border: 2px solid #000; margin: 8px 0 14px 0;">
+
     {{-- SKILLS & INTERESTS --}}
-    <div class="section">
-        <h2>SKILLS & INTERESTS</h2>
-        <ul style="list-style-type: none; padding-left: 0;">
+    <div class="section" style="margin-bottom: 15px;">
+        <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">SKILLS & INTERESTS</h2>
+
+        <ul style="list-style-type: disc; padding-left: 20px; margin-top: 5px;">
             @if ($skills->technical)
-                <li><strong>Technical Skills:</strong> {{ $skills->technical }}</li>
+                <li style="margin-bottom: 4px;">
+                    <strong>Technical Skills:</strong> {{ $skills->technical }}
+                </li>
             @endif
             @if ($skills->soft)
-                <li><strong>Soft Skills:</strong> {{ $skills->soft }}</li>
+                <li style="margin-bottom: 4px;">
+                    <strong>Soft Skills:</strong> {{ $skills->soft }}
+                </li>
             @endif
             @if ($skills->interests)
-                <li><strong>Interests:</strong> {{ $skills->interests }}</li>
+                <li>
+                    <strong>Interests:</strong> {{ $skills->interests }}
+                </li>
             @endif
         </ul>
     </div>
-
     {{-- EDUCATION --}}
     @if ($educations && count($educations) > 0)
         <div class="section">
-            <h2>EDUCATION</h2>
-            @foreach ($educations as $edu)
-                <table width="100%" style="margin-bottom: 10px;">
-                    <tr>
-                        <td style="font-weight: bold;">{{ $edu->institution }}</td>
-                        <td align="right">{{ $edu->year }}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{ $edu->degree }}<br>
-                            @if ($edu->board)
-                                {{ $edu->board }},
-                            @endif
-                        </td>
-                        <td align="right" style="font-weight: bold;">{{ $edu->grade }}</td>
-                    </tr>
-                </table>
-            @endforeach
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">EDUCATION</h2>
+            <ul style="list-style-type: disc; padding-left: 20px;">
+                @foreach ($educations as $edu)
+                    <li style="margin-bottom: 10px;">
+                        <table width="100%">
+                            <tr>
+                                <td style="font-weight: bold;">{{ $edu->institution }}</td>
+                                <td align="right">{{ $edu->year }}</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;">{{ $edu->board }}</span>
+                                    {{ $edu->degree }}
+                                </td>
+                                <td align="right" style="font-weight: bold;">{{ $edu->grade }}</td>
+                            </tr>
+                        </table>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     @endif
-
     {{-- PROJECTS --}}
     @if ($projects && count($projects) > 0)
         <div class="section">
-            <h2>PROJECTS</h2>
-            @foreach ($projects as $project)
-                <table width="100%" class="project-table">
-                    <tr>
-                        <td class="project-title">{{ $project->title }}</td>
-                        <td align="right"><em>TeamSize:</em> {{ $project->team_size }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">{{ $project->role }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">{{ $project->duration }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="project-details">Technologies Used: {{ $project->technologies }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">{{ $project->description }}</td>
-                    </tr>
-                </table>
-            @endforeach
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">PROJECTS</h2>
+            <ul style="padding-left: 15px;">
+                @foreach ($projects as $project)
+                    <li style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>{{ $project->title }}</strong><br>
+                                <em>{{ $project->role }}</em>
+                            </div>
+                            <div style="text-align: right;">
+                                <em>TeamSize:</em> {{ $project->team_size }}<br>
+                                {{ $project->duration }}
+                            </div>
+                        </div>
+                        <div style="font-style: italic; color: #333; margin-top: 2px;">
+                            Technologies Used: {{ $project->technologies }}
+                        </div>
+                        <div style="margin-top: 2px;">
+                            {{ $project->description }}
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     @endif
-
     {{-- COURSES & CERTIFICATIONS --}}
     @if ($courses && count($courses) > 0)
         <div class="section">
-            <h2>COURSES & CERTIFICATIONS</h2>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">COURSES & CERTIFICATIONS
+            </h2>
             <ul style="list-style-type: none; padding-left: 0;">
                 @foreach ($courses as $course)
                     <li>- {{ $course->title }}</li>
@@ -173,11 +188,11 @@
             </ul>
         </div>
     @endif
-
     {{-- ACHIEVEMENTS & ACTIVITIES --}}
     @if ($achievements && count($achievements) > 0)
         <div class="section">
-            <h2>ACHIEVEMENTS & ACTIVITIES</h2>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">ACHIEVEMENTS & ACTIVITIES
+            </h2>
             <ul style="list-style-type: none; padding-left: 0;">
                 @foreach ($achievements as $achieve)
                     <li>- {!! $achieve->title !!}</li>
@@ -185,11 +200,10 @@
             </ul>
         </div>
     @endif
-
     {{-- REFERENCES --}}
     @if ($references && count($references) > 0)
         <div class="section">
-            <h2>REFERENCES</h2>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">REFERENCES</h2>
             <ul style="list-style-type: none; padding-left: 0;">
                 @foreach ($references as $ref)
                     <li>
@@ -200,7 +214,6 @@
             </ul>
         </div>
     @endif
-
     @if ($educations && count($educations) > 0)
         <div style="text-align: center; margin-top: 20px;">
             {{ $educations[0]->institution ?? '' }}

@@ -24,36 +24,37 @@
 
             <?php if($header): ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Name</p>
                         <p class="info-value"><?php echo e($header->name); ?></p>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Email</p>
                         <p class="info-value"><?php echo e($header->email); ?></p>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Phone</p>
                         <p class="info-value"><?php echo e($header->phone); ?></p>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Date of Birth</p>
                         <p class="info-value"><?php echo e($header->dob); ?></p>
                     </div>
+
                     <?php if($header->github): ?>
-                        <div class="info-card">
+                        <div class="info-card border-l-4 border-violet-500">
                             <p class="info-label">GitHub</p>
                             <a href="<?php echo e($header->github); ?>" target="_blank" class="info-link"><?php echo e($header->github); ?></a>
                         </div>
                     <?php endif; ?>
                     <?php if($header->linkedin): ?>
-                        <div class="info-card">
+                        <div class="info-card border-l-4 border-violet-500">
                             <p class="info-label">LinkedIn</p>
                             <a href="<?php echo e($header->linkedin); ?>" target="_blank" class="info-link"><?php echo e($header->linkedin); ?></a>
                         </div>
                     <?php endif; ?>
                     <?php if($header->portfolio): ?>
-                        <div class="info-card">
+                        <div class="info-card border-l-4 border-violet-500">
                             <p class="info-label">Portfolio</p>
                             <a href="<?php echo e($header->portfolio); ?>" target="_blank"
                                 class="info-link"><?php echo e($header->portfolio); ?></a>
@@ -199,10 +200,11 @@
                                 <div class="project-duration"><?php echo e($project->duration); ?></div>
                             </div>
                             <p class="project-description"><?php echo e($project->description); ?></p>
-                            <div class="project-details">
+                            <div class="project-details flex justify-between">
                                 <div class="project-tech">Technologies: <?php echo e($project->technologies); ?></div>
-                                <div class="project-team">Team Size: <?php echo e($project->team_size); ?></div>
+                                <div class="project-team text-right">Team Size: <?php echo e($project->team_size); ?></div>
                             </div>
+
                             <div class="project-actions">
                                 <a href="<?php echo e(route('projects.edit', $project->id)); ?>" class="btn-edit">Edit</a>
                                 <form action="<?php echo e(route('projects.destroy', $project->id)); ?>" method="POST">
@@ -234,14 +236,14 @@
             </div>
 
             <?php if($achievements && $achievements->count()): ?>
-                <div class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <?php $__currentLoopData = $achievements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $achievement): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="achievement-card">
-                            <div class="achievement-content">
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md border-l-4 border-violet-500">
+                            <div class="mb-2 text-lg font-semibold text-white-300">
                                 <?php echo $achievement->title; ?>
 
                             </div>
-                            <div class="achievement-actions">
+                            <div class="flex justify-end space-x-2 mt-2">
                                 <a href="<?php echo e(route('achievements.edit', $achievement->id)); ?>" class="btn-edit">Edit</a>
                                 <form action="<?php echo e(route('achievements.destroy', $achievement->id)); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
@@ -272,14 +274,14 @@
             </div>
 
             <?php if($courses && $courses->count()): ?>
-                <div class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <?php $__currentLoopData = $courses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="course-card">
-                            <div class="course-content">
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md border-l-4 border-violet-500">
+                            <div class="mb-2 text-lg font-semibold text-white-300">
                                 <?php echo $course->title; ?>
 
                             </div>
-                            <div class="course-actions">
+                            <div class="flex justify-end space-x-2 mt-2">
                                 <a href="<?php echo e(route('courses.edit', $course->id)); ?>" class="btn-edit">Edit</a>
                                 <form action="<?php echo e(route('courses.destroy', $course->id)); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
@@ -305,6 +307,7 @@
             <?php endif; ?>
         </div>
 
+
         
         <div class="mb-8 bg-gray-800 p-6 rounded-lg shadow-lg">
             <div class="flex justify-between items-center mb-4">
@@ -315,21 +318,18 @@
             <?php if($references && $references->count()): ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <?php $__currentLoopData = $references; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $reference): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="reference-card">
-                            <div class="reference-field">
-                                <span class="reference-label">Name:</span>
-                                <span class="reference-value"><?php echo e($reference->name); ?></span>
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md border-l-4 border-purple-500">
+                            <div class="mb-2">
+                                <p class="text-lg font-semibold text-white-300"><?php echo e($reference->name); ?></p>
+                                <p class="text-gray-300">Email:
+                                    <a href="mailto:<?php echo e($reference->email); ?>" class="text-blue-400 hover:text-blue-300">
+                                        <?php echo e($reference->email); ?>
+
+                                    </a>
+                                </p>
+                                <p class="text-gray-300">Institution: <?php echo e($reference->institution); ?></p>
                             </div>
-                            <div class="reference-field">
-                                <span class="reference-label">Email:</span>
-                                <a href="mailto:<?php echo e($reference->email); ?>"
-                                    class="reference-link"><?php echo e($reference->email); ?></a>
-                            </div>
-                            <div class="reference-field">
-                                <span class="reference-label">Institution:</span>
-                                <span class="reference-value"><?php echo e($reference->institution); ?></span>
-                            </div>
-                            <div class="reference-actions">
+                            <div class="flex justify-end space-x-2 mt-2">
                                 <a href="<?php echo e(route('references.edit', $reference->id)); ?>" class="btn-edit">Edit</a>
                                 <form action="<?php echo e(route('references.destroy', $reference->id)); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
@@ -474,7 +474,7 @@
         }
 
         .btn-download:hover {
-            background-color: #2563eb;
+            background-color: #25c3eb;
             transform: translateY(-1px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -546,7 +546,7 @@
             background-color: #374151;
             padding: 1.25rem;
             border-radius: 0.5rem;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid #923bf6;
         }
 
         .education-degree {
@@ -582,7 +582,7 @@
             background-color: #374151;
             padding: 1.25rem;
             border-radius: 0.5rem;
-            border-left: 4px solid #8b5cf6;
+            border-left: 4px solid #9551fa;
         }
 
         .project-title {

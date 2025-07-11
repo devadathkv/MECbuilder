@@ -1,26 +1,26 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <div class="container mx-auto mt-8 max-w-lg bg-gray-900 text-white rounded-2xl shadow-lg p-6">
         <h2 class="text-2xl font-bold mb-4 text-center text-blue-400">Add Achievement</h2>
 
-        {{-- Show validation errors --}}
-        @if ($errors->any())
+        
+        <?php if($errors->any()): ?>
             <div class="bg-red-600 text-white rounded-lg p-4 mb-4">
                 <ul class="list-disc list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
 
-        {{-- Trix Editor CSS & JS --}}
+        
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.js"></script>
 
-        <form action="{{ route('achievements.store') }}" method="POST" class="space-y-4">
-            @csrf
+        <form action="<?php echo e(route('achievements.store')); ?>" method="POST" class="space-y-4">
+            <?php echo csrf_field(); ?>
 
             <div class="form-group">
                 <label for="title" class="block text-sm font-semibold text-gray-300 mb-2">Achievement</label>
@@ -58,4 +58,6 @@
             color: white;
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resume_builder\resources\views/mec/achievements/create.blade.php ENDPATH**/ ?>

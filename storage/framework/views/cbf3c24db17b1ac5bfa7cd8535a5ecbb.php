@@ -1,21 +1,28 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <div class="container mx-auto mt-8 max-w-lg bg-gray-900 text-white rounded-2xl shadow-lg p-6">
         <h2 class="text-2xl font-bold mb-4 text-center text-blue-400">Edit Course</h2>
 
-        <form action="{{ route('courses.update', $course->id) }}" method="POST" class="space-y-4">
-            @csrf
-            @method('PUT')
+        <form action="<?php echo e(route('courses.update', $course->id)); ?>" method="POST" class="space-y-4">
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PUT'); ?>
 
             <div class="form-group">
                 <label for="title" class="block text-sm font-semibold text-gray-300 mb-2">Course / Certification</label>
-                <input id="title" type="hidden" name="title" value="{{ old('title', $course->title) }}">
+                <input id="title" type="hidden" name="title" value="<?php echo e(old('title', $course->title)); ?>">
                 <trix-editor input="title"
                     class="trix-content bg-gray-800 text-gray-200 border border-gray-700 rounded-lg focus:ring focus:ring-blue-500"></trix-editor>
-                @error('title')
-                    <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                @enderror
+                <?php $__errorArgs = ['title'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <div class="text-red-500 text-sm mt-1"><?php echo e($message); ?></div>
+                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
             </div>
 
             <button type="submit"
@@ -24,9 +31,9 @@
             </button>
         </form>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/2.0.0/trix.min.js"></script>
 
@@ -52,4 +59,6 @@
             color: white;
         }
     </style>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resume_builder\resources\views/mec/courses/edit.blade.php ENDPATH**/ ?>

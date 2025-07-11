@@ -24,36 +24,37 @@
 
             @if ($header)
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Name</p>
                         <p class="info-value">{{ $header->name }}</p>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Email</p>
                         <p class="info-value">{{ $header->email }}</p>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Phone</p>
                         <p class="info-value">{{ $header->phone }}</p>
                     </div>
-                    <div class="info-card">
+                    <div class="info-card border-l-4 border-violet-500">
                         <p class="info-label">Date of Birth</p>
                         <p class="info-value">{{ $header->dob }}</p>
                     </div>
+
                     @if ($header->github)
-                        <div class="info-card">
+                        <div class="info-card border-l-4 border-violet-500">
                             <p class="info-label">GitHub</p>
                             <a href="{{ $header->github }}" target="_blank" class="info-link">{{ $header->github }}</a>
                         </div>
                     @endif
                     @if ($header->linkedin)
-                        <div class="info-card">
+                        <div class="info-card border-l-4 border-violet-500">
                             <p class="info-label">LinkedIn</p>
                             <a href="{{ $header->linkedin }}" target="_blank" class="info-link">{{ $header->linkedin }}</a>
                         </div>
                     @endif
                     @if ($header->portfolio)
-                        <div class="info-card">
+                        <div class="info-card border-l-4 border-violet-500">
                             <p class="info-label">Portfolio</p>
                             <a href="{{ $header->portfolio }}" target="_blank"
                                 class="info-link">{{ $header->portfolio }}</a>
@@ -199,10 +200,11 @@
                                 <div class="project-duration">{{ $project->duration }}</div>
                             </div>
                             <p class="project-description">{{ $project->description }}</p>
-                            <div class="project-details">
+                            <div class="project-details flex justify-between">
                                 <div class="project-tech">Technologies: {{ $project->technologies }}</div>
-                                <div class="project-team">Team Size: {{ $project->team_size }}</div>
+                                <div class="project-team text-right">Team Size: {{ $project->team_size }}</div>
                             </div>
+
                             <div class="project-actions">
                                 <a href="{{ route('projects.edit', $project->id) }}" class="btn-edit">Edit</a>
                                 <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
@@ -234,13 +236,13 @@
             </div>
 
             @if ($achievements && $achievements->count())
-                <div class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @foreach ($achievements as $achievement)
-                        <div class="achievement-card">
-                            <div class="achievement-content">
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md border-l-4 border-violet-500">
+                            <div class="mb-2 text-lg font-semibold text-white-300">
                                 {!! $achievement->title !!}
                             </div>
-                            <div class="achievement-actions">
+                            <div class="flex justify-end space-x-2 mt-2">
                                 <a href="{{ route('achievements.edit', $achievement->id) }}" class="btn-edit">Edit</a>
                                 <form action="{{ route('achievements.destroy', $achievement->id) }}" method="POST">
                                     @csrf
@@ -271,13 +273,13 @@
             </div>
 
             @if ($courses && $courses->count())
-                <div class="space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @foreach ($courses as $course)
-                        <div class="course-card">
-                            <div class="course-content">
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md border-l-4 border-violet-500">
+                            <div class="mb-2 text-lg font-semibold text-white-300">
                                 {!! $course->title !!}
                             </div>
-                            <div class="course-actions">
+                            <div class="flex justify-end space-x-2 mt-2">
                                 <a href="{{ route('courses.edit', $course->id) }}" class="btn-edit">Edit</a>
                                 <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
                                     @csrf
@@ -303,6 +305,7 @@
             @endif
         </div>
 
+
         {{-- References Section --}}
         <div class="mb-8 bg-gray-800 p-6 rounded-lg shadow-lg">
             <div class="flex justify-between items-center mb-4">
@@ -313,21 +316,17 @@
             @if ($references && $references->count())
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @foreach ($references as $reference)
-                        <div class="reference-card">
-                            <div class="reference-field">
-                                <span class="reference-label">Name:</span>
-                                <span class="reference-value">{{ $reference->name }}</span>
+                        <div class="bg-gray-700 p-4 rounded-lg shadow-md border-l-4 border-purple-500">
+                            <div class="mb-2">
+                                <p class="text-lg font-semibold text-white-300">{{ $reference->name }}</p>
+                                <p class="text-gray-300">Email:
+                                    <a href="mailto:{{ $reference->email }}" class="text-blue-400 hover:text-blue-300">
+                                        {{ $reference->email }}
+                                    </a>
+                                </p>
+                                <p class="text-gray-300">Institution: {{ $reference->institution }}</p>
                             </div>
-                            <div class="reference-field">
-                                <span class="reference-label">Email:</span>
-                                <a href="mailto:{{ $reference->email }}"
-                                    class="reference-link">{{ $reference->email }}</a>
-                            </div>
-                            <div class="reference-field">
-                                <span class="reference-label">Institution:</span>
-                                <span class="reference-value">{{ $reference->institution }}</span>
-                            </div>
-                            <div class="reference-actions">
+                            <div class="flex justify-end space-x-2 mt-2">
                                 <a href="{{ route('references.edit', $reference->id) }}" class="btn-edit">Edit</a>
                                 <form action="{{ route('references.destroy', $reference->id) }}" method="POST">
                                     @csrf
@@ -472,7 +471,7 @@
         }
 
         .btn-download:hover {
-            background-color: #2563eb;
+            background-color: #25c3eb;
             transform: translateY(-1px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
@@ -544,7 +543,7 @@
             background-color: #374151;
             padding: 1.25rem;
             border-radius: 0.5rem;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid #923bf6;
         }
 
         .education-degree {
@@ -580,7 +579,7 @@
             background-color: #374151;
             padding: 1.25rem;
             border-radius: 0.5rem;
-            border-left: 4px solid #8b5cf6;
+            border-left: 4px solid #9551fa;
         }
 
         .project-title {

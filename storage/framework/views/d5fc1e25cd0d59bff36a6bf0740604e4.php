@@ -2,10 +2,10 @@
 
 <?php $__env->startSection('content'); ?>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #0d1117 0%, #1a1f2a 100%);
             color: #e6edf3;
             margin: 0;
@@ -18,6 +18,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 35px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 0.8s ease forwards;
+        }
+
+        .welcome-card h1 {
+            font-size: 2rem;
+            color: #8ab4f8;
+            margin-bottom: 10px;
+        }
+
+        .welcome-card p {
+            font-size: 1.1rem;
+            color: #c9d1d9;
         }
 
         .dashboard-title {
@@ -98,13 +120,29 @@
                 opacity: 1;
             }
         }
-    </style>
 
+        @keyframes fadeInDown {
+            0% {
+                transform: translateY(-40px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
 
     <section class="dashboard-section">
         <div class="container">
-            <h1 class="dashboard-title">ath ang edk maashe</h1>
+            <!-- 👋 Welcome User -->
+            <div class="welcome-card">
+                <h1>Welcome, <?php echo e(Auth::user()->name); ?> 👋</h1>
+                <p>Glad to see you back on your dashboard!</p>
+            </div>
 
+            <!-- 📝 Resume Templates -->
             <div class="template-grid">
                 <!-- Resume Template Card -->
                 <div class="template-card">

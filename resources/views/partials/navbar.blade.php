@@ -2,7 +2,8 @@
     <div class="container">
         <div class="logo">
             <span class="logo-icon"><i class="fas fa-file-alt"></i></span>
-            <span class="logo-text">MECbuilder</span>
+            <a class="logo-text" href="{{ url('/') }}">MECbuilder</a>
+
         </div>
         =<nav class="nav">
             <div class="nav-links">

@@ -44,7 +44,9 @@
             border-collapse: collapse;
         }
 
-        .project-table {
+
+
+        */ .project-table {
             margin-bottom: 12px;
         }
 
@@ -61,12 +63,12 @@
 
 <body>
     
-    <table width="100%">
+    <table width="100%" style="margin-bottom: 10px;">
         <tr valign="top">
             <td align="left" style="width: 60%;">
-                <div style="font-size: 14px; font-weight: bold;"><?php echo e($header->name ?? ''); ?></div>
+                <div style="font-size: 20px; font-weight: bold;"><?php echo e($header->name ?? ''); ?></div>
 
-                <div style="margin-top: 4px;">
+                <div style="margin-top: 4px; font-size: 12px;">
                     <?php if($header->linkedin): ?>
                         <a href="<?php echo e($header->linkedin); ?>" style="color: #007bff; text-decoration: none;">LinkedIn</a> |
                     <?php endif; ?>
@@ -79,93 +81,114 @@
                 </div>
 
                 <?php if($header->dob): ?>
-                    <div style="margin-top: 5px;"><strong>DOB –</strong>
-                        <?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?></div>
+                    <div style="margin-top: 5px; font-size: 12px;">
+                        <strong>DOB –</strong> <?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?>
+
+                    </div>
                 <?php endif; ?>
             </td>
 
             <td align="right" style="width: 40%;">
                 <?php if($header->email): ?>
-                    <div style="margin-bottom: 2px;"><?php echo e($header->email); ?></div>
+                    <div style="margin-bottom: 2px; font-size: 12px;"><?php echo e($header->email); ?></div>
                 <?php endif; ?>
                 <?php if($header->phone): ?>
-                    <div><?php echo e($header->phone); ?></div>
+                    <div style="font-size: 12px;"><?php echo e($header->phone); ?></div>
                 <?php endif; ?>
             </td>
         </tr>
     </table>
 
     
-    <div class="section">
-        <h2>SKILLS & INTERESTS</h2>
-        <ul style="list-style-type: none; padding-left: 0;">
+    <hr style="border: 2px solid #000; margin: 8px 0 14px 0;">
+
+    
+    <div class="section" style="margin-bottom: 15px;">
+        <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">SKILLS & INTERESTS</h2>
+
+        <ul style="list-style-type: disc; padding-left: 20px; margin-top: 5px;">
             <?php if($skills->technical): ?>
-                <li><strong>Technical Skills:</strong> <?php echo e($skills->technical); ?></li>
+                <li style="margin-bottom: 4px;">
+                    <strong>Technical Skills:</strong> <?php echo e($skills->technical); ?>
+
+                </li>
             <?php endif; ?>
             <?php if($skills->soft): ?>
-                <li><strong>Soft Skills:</strong> <?php echo e($skills->soft); ?></li>
+                <li style="margin-bottom: 4px;">
+                    <strong>Soft Skills:</strong> <?php echo e($skills->soft); ?>
+
+                </li>
             <?php endif; ?>
             <?php if($skills->interests): ?>
-                <li><strong>Interests:</strong> <?php echo e($skills->interests); ?></li>
+                <li>
+                    <strong>Interests:</strong> <?php echo e($skills->interests); ?>
+
+                </li>
             <?php endif; ?>
         </ul>
     </div>
-
     
     <?php if($educations && count($educations) > 0): ?>
         <div class="section">
-            <h2>EDUCATION</h2>
-            <?php $__currentLoopData = $educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <table width="100%" style="margin-bottom: 10px;">
-                    <tr>
-                        <td style="font-weight: bold;"><?php echo e($edu->institution); ?></td>
-                        <td align="right"><?php echo e($edu->year); ?></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <?php echo e($edu->degree); ?><br>
-                            <?php if($edu->board): ?>
-                                <?php echo e($edu->board); ?>,
-                            <?php endif; ?>
-                        </td>
-                        <td align="right" style="font-weight: bold;"><?php echo e($edu->grade); ?></td>
-                    </tr>
-                </table>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">EDUCATION</h2>
+            <ul style="list-style-type: disc; padding-left: 20px;">
+                <?php $__currentLoopData = $educations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $edu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li style="margin-bottom: 10px;">
+                        <table width="100%">
+                            <tr>
+                                <td style="font-weight: bold;"><?php echo e($edu->institution); ?></td>
+                                <td align="right"><?php echo e($edu->year); ?></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span style="font-weight: bold;"><?php echo e($edu->board); ?></span>
+                                    <?php echo e($edu->degree); ?>
+
+                                </td>
+                                <td align="right" style="font-weight: bold;"><?php echo e($edu->grade); ?></td>
+                            </tr>
+                        </table>
+                    </li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </ul>
         </div>
     <?php endif; ?>
-
     
     <?php if($projects && count($projects) > 0): ?>
         <div class="section">
-            <h2>PROJECTS</h2>
-            <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <table width="100%" class="project-table">
-                    <tr>
-                        <td class="project-title"><?php echo e($project->title); ?></td>
-                        <td align="right"><em>TeamSize:</em> <?php echo e($project->team_size); ?></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><?php echo e($project->role); ?></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><?php echo e($project->duration); ?></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" class="project-details">Technologies Used: <?php echo e($project->technologies); ?></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><?php echo e($project->description); ?></td>
-                    </tr>
-                </table>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">PROJECTS</h2>
+            <ul style="padding-left: 15px;">
+                <?php $__currentLoopData = $projects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $project): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li style="margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong><?php echo e($project->title); ?></strong><br>
+                                <em><?php echo e($project->role); ?></em>
+                            </div>
+                            <div style="text-align: right;">
+                                <em>TeamSize:</em> <?php echo e($project->team_size); ?><br>
+                                <?php echo e($project->duration); ?>
+
+                            </div>
+                        </div>
+                        <div style="font-style: italic; color: #333; margin-top: 2px;">
+                            Technologies Used: <?php echo e($project->technologies); ?>
+
+                        </div>
+                        <div style="margin-top: 2px;">
+                            <?php echo e($project->description); ?>
+
+                        </div>
+                    </li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </ul>
         </div>
     <?php endif; ?>
-
     
     <?php if($courses && count($courses) > 0): ?>
         <div class="section">
-            <h2>COURSES & CERTIFICATIONS</h2>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">COURSES & CERTIFICATIONS
+            </h2>
             <ul style="list-style-type: none; padding-left: 0;">
                 <?php $__currentLoopData = $courses; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $course): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li>- <?php echo e($course->title); ?></li>
@@ -173,11 +196,11 @@
             </ul>
         </div>
     <?php endif; ?>
-
     
     <?php if($achievements && count($achievements) > 0): ?>
         <div class="section">
-            <h2>ACHIEVEMENTS & ACTIVITIES</h2>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">ACHIEVEMENTS & ACTIVITIES
+            </h2>
             <ul style="list-style-type: none; padding-left: 0;">
                 <?php $__currentLoopData = $achievements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $achieve): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li>- <?php echo $achieve->title; ?></li>
@@ -185,11 +208,10 @@
             </ul>
         </div>
     <?php endif; ?>
-
     
     <?php if($references && count($references) > 0): ?>
         <div class="section">
-            <h2>REFERENCES</h2>
+            <h2 style="border-bottom: 0.8px solid #888; margin-bottom: 8px; font-size: 14px;">REFERENCES</h2>
             <ul style="list-style-type: none; padding-left: 0;">
                 <?php $__currentLoopData = $references; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li>
@@ -201,7 +223,6 @@
             </ul>
         </div>
     <?php endif; ?>
-
     <?php if($educations && count($educations) > 0): ?>
         <div style="text-align: center; margin-top: 20px;">
             <?php echo e($educations[0]->institution ?? ''); ?>
