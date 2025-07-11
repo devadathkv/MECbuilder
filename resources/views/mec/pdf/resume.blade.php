@@ -214,7 +214,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                             <div style="line-height: 1.2;">
                                 <strong>{{ $project->title }}</strong><br>
-                                <em>{{ $project->role }}</em>
+                                <strong><em>{{ $project->role }}</em></strong>
                             </div>
                             <div style="text-align: right; line-height: 1.2;">
                                 <em>TeamSize:</em> {{ $project->team_size }}<br>
@@ -222,7 +222,7 @@
                             </div>
                         </div>
                         <div style="font-style: italic; color: #333; margin-top: 1px; line-height: 1.2;">
-                            Technologies Used: {{ $project->technologies }}
+                            <strong>Technologies Used:</strong> {{ $project->technologies }}
                         </div>
                         <div style="margin-top: 1px; line-height: 1.2;">
                             {{ $project->description }}
@@ -278,10 +278,9 @@
             <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
                 @foreach ($references as $ref)
                     <li style="margin-bottom: 2px; line-height: 1.2;">
-                        <strong>{{ $ref->name }}</strong>,
-                        {{ $ref->position }},
-                        {{ $ref->institution }},
-                        Email ID: <a href="mailto:{{ $ref->email }}" style="color: #000; text-decoration: none;">
+                        <strong>{{ $ref->name }}</strong>
+                        {{ rtrim($ref->position, ',') }} at {{ rtrim($ref->institution, ',') }}
+                        Email: <a href="mailto:{{ $ref->email }}" style="color: #004ffb; text-decoration: none;">
                             {{ $ref->email }}
                         </a>
                     </li>

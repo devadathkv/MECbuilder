@@ -219,7 +219,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                             <div style="line-height: 1.2;">
                                 <strong><?php echo e($project->title); ?></strong><br>
-                                <em><?php echo e($project->role); ?></em>
+                                <strong><em><?php echo e($project->role); ?></em></strong>
                             </div>
                             <div style="text-align: right; line-height: 1.2;">
                                 <em>TeamSize:</em> <?php echo e($project->team_size); ?><br>
@@ -227,7 +227,7 @@
                             </div>
                         </div>
                         <div style="font-style: italic; color: #333; margin-top: 1px; line-height: 1.2;">
-                            Technologies Used: <?php echo e($project->technologies); ?>
+                            <strong>Technologies Used:</strong> <?php echo e($project->technologies); ?>
 
                         </div>
                         <div style="margin-top: 1px; line-height: 1.2;">
@@ -285,10 +285,10 @@
             <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
                 <?php $__currentLoopData = $references; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li style="margin-bottom: 2px; line-height: 1.2;">
-                        <strong><?php echo e($ref->name); ?></strong>,
-                        <?php echo e($ref->position); ?>,
-                        <?php echo e($ref->institution); ?>,
-                        Email ID: <a href="mailto:<?php echo e($ref->email); ?>" style="color: #000; text-decoration: none;">
+                        <strong><?php echo e($ref->name); ?></strong>
+                        <?php echo e(rtrim($ref->position, ',')); ?> at <?php echo e(rtrim($ref->institution, ',')); ?>
+
+                        Email: <a href="mailto:<?php echo e($ref->email); ?>" style="color: #004ffb; text-decoration: none;">
                             <?php echo e($ref->email); ?>
 
                         </a>
