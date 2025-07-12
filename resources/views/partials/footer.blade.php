@@ -20,9 +20,8 @@
             gap: 8px;
             margin-bottom: 8px;
         ">
-            <span class="logo-icon" style="font-size: 1.8rem; color: #58a6ff;">
-                <i class="fas fa-file-alt"></i>
-            </span>
+            <img src="https://www.mec.ac.in/static/media/collegelogohollow.f2e70403.png" alt="MEC Logo"
+                style="height: 40px; vertical-align: middle; margin-right: 5px;">
             <span class="logo-text"
                 style="
                 font-weight: 600;

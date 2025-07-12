@@ -1,6 +1,6 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <style>
         .form-container {
             max-width: 700px;
@@ -98,29 +98,31 @@
     <div class="form-container">
         <h2>Edit Skills & Interests</h2>
 
-        <form action="{{ route('skills.update') }}" method="POST">
-            @csrf
-            @method('PUT')
+        <form action="<?php echo e(route('skills.update')); ?>" method="POST">
+            <?php echo csrf_field(); ?>
+            <?php echo method_field('PUT'); ?>
 
             <div class="mb-3">
                 <label for="technical" class="form-label">Technical Skills</label>
-                <textarea name="technical" id="technical" class="form-control" rows="3" required>{{ old('technical', $skill->technical) }}</textarea>
+                <textarea name="technical" id="technical" class="form-control" rows="3" required><?php echo e(old('technical', $skill->technical)); ?></textarea>
             </div>
 
             <div class="mb-3">
                 <label for="soft" class="form-label">Soft Skills</label>
-                <textarea name="soft" id="soft" class="form-control" rows="3" required>{{ old('soft', $skill->soft) }}</textarea>
+                <textarea name="soft" id="soft" class="form-control" rows="3" required><?php echo e(old('soft', $skill->soft)); ?></textarea>
             </div>
 
             <div class="mb-3">
                 <label for="interests" class="form-label">Interests</label>
-                <textarea name="interests" id="interests" class="form-control" rows="3" required>{{ old('interests', $skill->interests) }}</textarea>
+                <textarea name="interests" id="interests" class="form-control" rows="3" required><?php echo e(old('interests', $skill->interests)); ?></textarea>
             </div>
 
             <div class="button-group">
                 <button type="submit" class="btn-success">Update Skills</button>
-                <a href="{{ route('mec.landing') }}" class="btn-secondary">Cancel</a>
+                <a href="<?php echo e(route('mec.landing')); ?>" class="btn-secondary">Cancel</a>
             </div>
         </form>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\resume_builder\resources\views/mec/skills/edit.blade.php ENDPATH**/ ?>

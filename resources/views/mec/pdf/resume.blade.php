@@ -138,7 +138,7 @@
                 <div style="height: 2.5px;"></div>
 
 
-                <div style="font-size: 12px; color: #007bff; margin-bottom: 2px;">
+                <div style="font-size: 12px; color: #2f4f71;; margin-bottom: 2px;">
                     @if ($header->linkedin)
                         <a href="{{ $header->linkedin }}" style="color: #2f4f71; text-decoration: none;">LinkedIn</a>
                     @endif
@@ -195,7 +195,7 @@
         </ul>
     </div>
 
-<div style="height: 3.4px;"></div>
+    <div style="height: 3.4px;"></div>
     {{-- EDUCATION --}}
     @if ($educations && count($educations) > 0)
         <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -305,12 +305,14 @@
             <ul style="list-style-type: disc; padding-left: 18px; margin: 0; color: #000;">
                 @foreach ($references as $ref)
                     <li style="margin-bottom: 2px; line-height: 1.2;">
-                        <strong>{{ $ref->name }}</strong>
-                        {{ rtrim($ref->position, ',') }} at {{ rtrim($ref->institution, ',') }}
+                        <strong>{{ $ref->name }}</strong>,
+                        {{ rtrim($ref->position, ',') }} {{ rtrim($ref->institution, ',') }},
                         Email:
-                        <a href="mailto:{{ $ref->email }}" style="color: #0000FF; text-decoration: underline;">
+                        <a href="mailto:{{ $ref->email }}"
+                            style="color: #2f4f71 !important; text-decoration: !important;">
                             <strong>{{ $ref->email }}</strong>
                         </a>
+
                     </li>
                 @endforeach
             </ul>

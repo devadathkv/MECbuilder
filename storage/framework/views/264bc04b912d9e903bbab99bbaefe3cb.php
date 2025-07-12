@@ -139,7 +139,7 @@
                 <div style="height: 2.5px;"></div>
 
 
-                <div style="font-size: 12px; color: #007bff; margin-bottom: 2px;">
+                <div style="font-size: 12px; color: #2f4f71;; margin-bottom: 2px;">
                     <?php if($header->linkedin): ?>
                         <a href="<?php echo e($header->linkedin); ?>" style="color: #2f4f71; text-decoration: none;">LinkedIn</a>
                     <?php endif; ?>
@@ -199,7 +199,7 @@
         </ul>
     </div>
 
-<div style="height: 3px;"></div>
+    <div style="height: 3.4px;"></div>
     
     <?php if($educations && count($educations) > 0): ?>
         <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -312,13 +312,14 @@
             <ul style="list-style-type: disc; padding-left: 18px; margin: 0; color: #000;">
                 <?php $__currentLoopData = $references; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li style="margin-bottom: 2px; line-height: 1.2;">
-                        <strong><?php echo e($ref->name); ?></strong>
-                        <?php echo e(rtrim($ref->position, ',')); ?> at <?php echo e(rtrim($ref->institution, ',')); ?>
-
+                        <strong><?php echo e($ref->name); ?></strong>,
+                        <?php echo e(rtrim($ref->position, ',')); ?> <?php echo e(rtrim($ref->institution, ',')); ?>,
                         Email:
-                        <a href="mailto:<?php echo e($ref->email); ?>" style="color: #0000FF; text-decoration: underline;">
+                        <a href="mailto:<?php echo e($ref->email); ?>"
+                            style="color: #2f4f71 !important; text-decoration: !important;">
                             <strong><?php echo e($ref->email); ?></strong>
                         </a>
+
                     </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>

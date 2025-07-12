@@ -1,11 +1,12 @@
 <header class="header">
     <div class="container">
         <div class="logo">
-            <span class="logo-icon"><i class="fas fa-file-alt"></i></span>
+            <img src="https://www.mec.ac.in/static/media/collegelogohollow.f2e70403.png" alt="MEC Logo"
+                style="height: 45px; vertical-align: middle; margin-right: 5px;">
             <a class="logo-text" href="<?php echo e(url('/')); ?>">MECbuilder</a>
 
         </div>
-        =<nav class="nav">
+        <nav class="nav">
             <div class="nav-links">
                 <?php if(auth()->guard()->check()): ?>
                     <a href="<?php echo e(url('/dashboard')); ?>" class="nav-btn">Dashboard</a>
