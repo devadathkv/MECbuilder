@@ -112,6 +112,15 @@
                 padding: 8px 0;
             }
         }
+
+        .section a {
+            color: #000 !important;
+            /* Force link text to black */
+            /* font-weight: bold !important; */
+            /* Make it bold */
+            text-decoration: none !important;
+            /* Remove underline */
+        }
     </style>
 </head>
 

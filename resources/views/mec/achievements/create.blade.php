@@ -95,6 +95,7 @@
             background-color: #0d1117;
             border: 1px solid #30363d;
         }
+        
     </style>
 
     <div class="form-container">
@@ -120,7 +121,10 @@
 
             <div class="mb-3">
                 <label for="title" class="form-label">Achievement</label>
-                <input id="title" type="hidden" name="title">
+                {{-- Hidden input to store Trix content --}}
+                <input id="title" type="hidden" name="title" value="{{ old('title') }}">
+
+                {{-- Trix Editor --}}
                 <trix-editor input="title" class="trix-content"></trix-editor>
             </div>
 

@@ -120,7 +120,10 @@
 
             <div class="mb-3">
                 <label for="title" class="form-label">Achievement</label>
-                <input id="title" type="hidden" name="title">
+                
+                <input id="title" type="hidden" name="title" value="<?php echo e(old('title')); ?>">
+
+                
                 <trix-editor input="title" class="trix-content"></trix-editor>
             </div>
 

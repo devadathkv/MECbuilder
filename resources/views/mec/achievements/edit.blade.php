@@ -95,6 +95,7 @@
             background-color: #0d1117;
             border: 1px solid #30363d;
         }
+        
     </style>
 
     {{-- Trix Editor CSS & JS --}}
