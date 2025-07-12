@@ -10,14 +10,15 @@
         }
 
         body {
-            font-family: DejaVu Sans, sans-serif;
-            font-size: 10.7px;
+            font-family: Calibre, sans-serif;
+            font-size: 10px !important;
             line-height: 1.1;
             color: #000;
         }
 
+
         h2 {
-            font-size: 13px;
+            font-size: 10.7px !important;
             text-transform: uppercase;
             border-bottom: 1px solid #000;
             padding-bottom: 1px;
@@ -27,6 +28,7 @@
 
         .section {
             margin-bottom: 12px;
+            font-size: 10px !important;
         }
 
         ul {
@@ -93,7 +95,7 @@
             display: list-item;
             /* <- Important: keeps the bullet */
             margin-bottom: 2px;
-            line-height: 1.3;
+            line-height: 1.1;
         }
 
         ul.aligned-bullets li .label {
@@ -126,7 +128,7 @@
 
 <body>
     
-    <table width="100%" style="font-family: Arial, sans-serif; margin-bottom: 5px;">
+    <table width="100%" style="font-family: Calibre, sans-serif; margin: 0; padding: 0; border-collapse: collapse;">
         <tr>
             <!-- Left Side: Name, Links, DOB -->
             <td style="text-align: left; vertical-align: top;">
@@ -134,22 +136,23 @@
                     <?php echo e($header->name ?? ''); ?>
 
                 </div>
+                <div style="height: 2.5px;"></div>
+
 
                 <div style="font-size: 12px; color: #007bff; margin-bottom: 2px;">
                     <?php if($header->linkedin): ?>
-                        <a href="<?php echo e($header->linkedin); ?>" style="color: #007bff; text-decoration: none;">LinkedIn</a>
+                        <a href="<?php echo e($header->linkedin); ?>" style="color: #2f4f71; text-decoration: none;">LinkedIn</a>
                     <?php endif; ?>
                     <?php if($header->github): ?>
                         <span style="color: #000;"> | </span>
-                        <a href="<?php echo e($header->github); ?>" style="color: #007bff; text-decoration: none;">GitHub</a>
+                        <a href="<?php echo e($header->github); ?>" style="color: #2f4f71; text-decoration: none;">GitHub</a>
                     <?php endif; ?>
                     <?php if($header->portfolio): ?>
                         <span style="color: #000;"> | </span>
-                        <a href="<?php echo e($header->portfolio); ?>" style="color: #007bff; text-decoration: none;">Portfolio</a>
+                        <a href="<?php echo e($header->portfolio); ?>" style="color: #2f4f71; text-decoration: none;">Portfolio</a>
                     <?php endif; ?>
                 </div>
-
-
+                <div style="height: 2.5px;"></div>
                 <?php if($header->dob): ?>
                     <div style="font-size: 12px;">
                         DOB –<?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?>
@@ -159,11 +162,13 @@
             </td>
 
             <!-- Right Side: Email and Phone - now vertically padded -->
-            <td style="text-align: right; vertical-align: top; padding-top: 30px;">
+            <td style="text-align: right; vertical-align: bottom; padding-top: 0;">
+
                 <div style="font-size: 12px; margin-bottom: 2px;">
                     <?php echo e($header->email ?? ''); ?>
 
                 </div>
+                <div style="height: 2.5px;"></div>
                 <div style="font-size: 12px;">
                     <?php echo e($header->phone ?? ''); ?>
 
@@ -172,7 +177,9 @@
         </tr>
     </table>
     
-    <hr style="border: 2px solid #000; margin: 4px 0 10px 0;">
+    <hr style="border: 2px solid #000; margin: 2px 0 4px 0;">
+    <div style="height: 3px;"></div>
+
     
     <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
         <h2
@@ -192,9 +199,7 @@
         </ul>
     </div>
 
-
-
-    <div style="height: 2px;"></div>
+<div style="height: 3px;"></div>
     
     <?php if($educations && count($educations) > 0): ?>
         <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -225,7 +230,7 @@
         </div>
     <?php endif; ?>
 
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
 
     
     <?php if($projects && count($projects) > 0): ?>
@@ -262,7 +267,7 @@
             </ul>
         </div>
     <?php endif; ?>
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
     
     <?php if($courses && count($courses) > 0): ?>
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -278,7 +283,7 @@
             </ul>
         </div>
     <?php endif; ?>
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
 
     
     <?php if($achievements && count($achievements) > 0): ?>
@@ -295,7 +300,7 @@
         </div>
     <?php endif; ?>
 
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
     
     <?php if($references && count($references) > 0): ?>
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -304,22 +309,23 @@
                 REFERENCES
             </h2>
 
-
-            <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
+            <ul style="list-style-type: disc; padding-left: 18px; margin: 0; color: #000;">
                 <?php $__currentLoopData = $references; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $ref): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li style="margin-bottom: 2px; line-height: 1.2;">
                         <strong><?php echo e($ref->name); ?></strong>
                         <?php echo e(rtrim($ref->position, ',')); ?> at <?php echo e(rtrim($ref->institution, ',')); ?>
 
-                        Email: <a href="mailto:<?php echo e($ref->email); ?>" style="color: #004ffb; text-decoration: none;">
-                            <?php echo e($ref->email); ?>
-
+                        Email:
+                        <a href="mailto:<?php echo e($ref->email); ?>" style="color: #0000FF; text-decoration: underline;">
+                            <strong><?php echo e($ref->email); ?></strong>
                         </a>
                     </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
+
         </div>
     <?php endif; ?>
+    <div style="height: 3px;"></div>
 
     <div class="resume-footer">
         Govt. Model Engineering College, Kochi

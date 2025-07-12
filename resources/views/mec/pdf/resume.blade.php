@@ -10,14 +10,15 @@
         }
 
         body {
-            font-family: DejaVu Sans, sans-serif;
-            font-size: 10.7px;
+            font-family: Calibre, sans-serif;
+            font-size: 10px !important;
             line-height: 1.1;
             color: #000;
         }
 
+
         h2 {
-            font-size: 13px;
+            font-size: 10.7px !important;
             text-transform: uppercase;
             border-bottom: 1px solid #000;
             padding-bottom: 1px;
@@ -27,6 +28,7 @@
 
         .section {
             margin-bottom: 12px;
+            font-size: 10px !important;
         }
 
         ul {
@@ -93,7 +95,7 @@
             display: list-item;
             /* <- Important: keeps the bullet */
             margin-bottom: 2px;
-            line-height: 1.3;
+            line-height: 1.1;
         }
 
         ul.aligned-bullets li .label {
@@ -126,29 +128,30 @@
 
 <body>
     {{-- HEADER --}}
-    <table width="100%" style="font-family: Arial, sans-serif; margin-bottom: 5px;">
+    <table width="100%" style="font-family: Calibre, sans-serif; margin: 0; padding: 0; border-collapse: collapse;">
         <tr>
             <!-- Left Side: Name, Links, DOB -->
             <td style="text-align: left; vertical-align: top;">
                 <div style="font-size: 20px; font-weight: bold; margin-bottom: 2px;">
                     {{ $header->name ?? '' }}
                 </div>
+                <div style="height: 2.5px;"></div>
+
 
                 <div style="font-size: 12px; color: #007bff; margin-bottom: 2px;">
                     @if ($header->linkedin)
-                        <a href="{{ $header->linkedin }}" style="color: #007bff; text-decoration: none;">LinkedIn</a>
+                        <a href="{{ $header->linkedin }}" style="color: #2f4f71; text-decoration: none;">LinkedIn</a>
                     @endif
                     @if ($header->github)
                         <span style="color: #000;"> | </span>
-                        <a href="{{ $header->github }}" style="color: #007bff; text-decoration: none;">GitHub</a>
+                        <a href="{{ $header->github }}" style="color: #2f4f71; text-decoration: none;">GitHub</a>
                     @endif
                     @if ($header->portfolio)
                         <span style="color: #000;"> | </span>
-                        <a href="{{ $header->portfolio }}" style="color: #007bff; text-decoration: none;">Portfolio</a>
+                        <a href="{{ $header->portfolio }}" style="color: #2f4f71; text-decoration: none;">Portfolio</a>
                     @endif
                 </div>
-
-
+                <div style="height: 2.5px;"></div>
                 @if ($header->dob)
                     <div style="font-size: 12px;">
                         DOB –{{ \Carbon\Carbon::parse($header->dob)->format('d/m/Y') }}
@@ -157,10 +160,12 @@
             </td>
 
             <!-- Right Side: Email and Phone - now vertically padded -->
-            <td style="text-align: right; vertical-align: top; padding-top: 30px;">
+            <td style="text-align: right; vertical-align: bottom; padding-top: 0;">
+
                 <div style="font-size: 12px; margin-bottom: 2px;">
                     {{ $header->email ?? '' }}
                 </div>
+                <div style="height: 2.5px;"></div>
                 <div style="font-size: 12px;">
                     {{ $header->phone ?? '' }}
                 </div>
@@ -168,7 +173,9 @@
         </tr>
     </table>
     {{-- Thick Divider Below Header --}}
-    <hr style="border: 2px solid #000; margin: 4px 0 10px 0;">
+    <hr style="border: 2px solid #000; margin: 2px 0 4px 0;">
+    <div style="height: 3px;"></div>
+
     {{-- SKILLS & INTERESTS --}}
     <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
         <h2
@@ -188,9 +195,7 @@
         </ul>
     </div>
 
-
-
-    <div style="height: 2px;"></div>
+<div style="height: 3.4px;"></div>
     {{-- EDUCATION --}}
     @if ($educations && count($educations) > 0)
         <div class="section" style="margin: 2px 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -220,7 +225,7 @@
         </div>
     @endif
 
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
 
     {{-- PROJECTS --}}
     @if ($projects && count($projects) > 0)
@@ -255,7 +260,7 @@
             </ul>
         </div>
     @endif
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
     {{-- COURSES & CERTIFICATIONS --}}
     @if ($courses && count($courses) > 0)
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -271,7 +276,7 @@
             </ul>
         </div>
     @endif
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
 
     {{-- ACHIEVEMENTS & ACTIVITIES --}}
     @if ($achievements && count($achievements) > 0)
@@ -288,7 +293,7 @@
         </div>
     @endif
 
-    <div style="height: 2px;"></div>
+    <div style="height: 3px;"></div>
     {{-- REFERENCES --}}
     @if ($references && count($references) > 0)
         <div class="section" style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11.5px;">
@@ -297,20 +302,22 @@
                 REFERENCES
             </h2>
 
-
-            <ul style="list-style-type: disc; padding-left: 18px; margin: 0;">
+            <ul style="list-style-type: disc; padding-left: 18px; margin: 0; color: #000;">
                 @foreach ($references as $ref)
                     <li style="margin-bottom: 2px; line-height: 1.2;">
                         <strong>{{ $ref->name }}</strong>
                         {{ rtrim($ref->position, ',') }} at {{ rtrim($ref->institution, ',') }}
-                        Email: <a href="mailto:{{ $ref->email }}" style="color: #004ffb; text-decoration: none;">
-                            {{ $ref->email }}
+                        Email:
+                        <a href="mailto:{{ $ref->email }}" style="color: #0000FF; text-decoration: underline;">
+                            <strong>{{ $ref->email }}</strong>
                         </a>
                     </li>
                 @endforeach
             </ul>
+
         </div>
     @endif
+    <div style="height: 3px;"></div>
 
     <div class="resume-footer">
         Govt. Model Engineering College, Kochi
