@@ -128,54 +128,50 @@
 
 <body>
     
-    <table width="100%" style="font-family: Calibre, sans-serif; margin: 0; padding: 0; border-collapse: collapse;">
-        <tr>
-            <!-- Left Side: Name, Links, DOB -->
-            <td style="text-align: left; vertical-align: top;">
-                <div style="font-size: 20px; font-weight: bold; margin-bottom: 2px;">
-                    <?php echo e($header->name ?? ''); ?>
+    <div
+        style="font-family: Calibre, sans-serif; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; margin-bottom: 4px;">
+        <!-- Left Side: Name, Links, DOB -->
+        <div style="flex: 1; min-width: 200px;">
+            <div style="font-size: 19px; font-weight: bold; margin-bottom: 2px;">
+                <?php echo e($header->name ?? ''); ?>
 
-                </div>
-                <div style="height: 2.5px;"></div>
-
-
-                <div style="font-size: 12px; color: #2f4f71;; margin-bottom: 2px;">
-                    <?php if($header->linkedin): ?>
-                        <a href="<?php echo e($header->linkedin); ?>" style="color: #2f4f71; text-decoration: none;">LinkedIn</a>
-                    <?php endif; ?>
-                    <?php if($header->github): ?>
-                        <span style="color: #000;"> | </span>
-                        <a href="<?php echo e($header->github); ?>" style="color: #2f4f71; text-decoration: none;">GitHub</a>
-                    <?php endif; ?>
-                    <?php if($header->portfolio): ?>
-                        <span style="color: #000;"> | </span>
-                        <a href="<?php echo e($header->portfolio); ?>" style="color: #2f4f71; text-decoration: none;">Portfolio</a>
-                    <?php endif; ?>
-                </div>
-                <div style="height: 2.5px;"></div>
-                <?php if($header->dob): ?>
-                    <div style="font-size: 12px;">
-                        DOB –<?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?>
-
-                    </div>
+            </div>
+            <div style="height: 3px;"></div>
+            <div style="font-size: 11px; color: #2f4f71; margin-bottom: 2px;">
+                <?php if($header->linkedin): ?>
+                    <a href="<?php echo e($header->linkedin); ?>" style="color: #2f4f71; text-decoration: none;">LinkedIn</a>
                 <?php endif; ?>
-            </td>
-
-            <!-- Right Side: Email and Phone - now vertically padded -->
-            <td style="text-align: right; vertical-align: bottom; padding-top: 0;">
-
-                <div style="font-size: 12px; margin-bottom: 2px;">
-                    <?php echo e($header->email ?? ''); ?>
+                <?php if($header->github): ?>
+                    <span style="color: #000;"> | </span>
+                    <a href="<?php echo e($header->github); ?>" style="color: #2f4f71; text-decoration: none;">GitHub</a>
+                <?php endif; ?>
+                <?php if($header->portfolio): ?>
+                    <span style="color: #000;"> | </span>
+                    <a href="<?php echo e($header->portfolio); ?>" style="color: #2f4f71; text-decoration: none;">Portfolio</a>
+                <?php endif; ?>
+            </div>
+            <div style="height: 3px;"></div>
+            <?php if($header->dob): ?>
+                <div style="font-size: 11px;">
+                    DOB – <?php echo e(\Carbon\Carbon::parse($header->dob)->format('d/m/Y')); ?>
 
                 </div>
-                <div style="height: 2.5px;"></div>
-                <div style="font-size: 12px;">
-                    <?php echo e($header->phone ?? ''); ?>
+            <?php endif; ?>
+        </div>
 
-                </div>
-            </td>
-        </tr>
-    </table>
+        <!-- Right Side: Email and Phone -->
+        <div style="flex: 0 0 auto; text-align: right; min-width: 180px; margin-bottom: 0;">
+            <div style="font-size: 11px; margin-bottom: 2px;">
+                <?php echo e($header->email ?? ''); ?>
+
+            </div>
+            <div style="height:3px;"></div>
+            <div style="font-size: 11px;">
+                <?php echo e($header->phone ?? ''); ?>
+
+            </div>
+        </div>
+    </div>
     
     <hr style="border: 2px solid #000; margin: 2px 0 4px 0;">
     <div style="height: 3px;"></div>
@@ -198,6 +194,7 @@
             <?php endif; ?>
         </ul>
     </div>
+
 
     <div style="height: 3.4px;"></div>
     

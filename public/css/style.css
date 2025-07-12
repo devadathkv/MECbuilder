@@ -198,7 +198,7 @@ body {
 }
 
 .cta-btn.secondary {
-    background-color: transparent;
+    background-color: rgb(0, 98, 255);
     color: var(--dark-text);
     border: 1px solid var(--dark-border);
 }
