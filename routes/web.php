@@ -19,6 +19,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware('auth')->prefix('mec-resume')->group(function () {
 
+    Route::get('/dashboard', [MainController::class, 'index'])->name('dashboard');
+    Route::post('/dashboard/suggestions', [MainController::class, 'fetchSuggestions'])->name('dashboard.suggestions');
+
+
     Route::get('/', [MainController::class, 'mec'])->name('mec.landing');
 
     // Header routes
@@ -71,6 +75,7 @@ Route::middleware('auth')->prefix('mec-resume')->group(function () {
 
     // Resume download
     Route::get('/resume/download', [MainController::class, 'downloadPDF'])->name('resume.download');
+
 });
 
 require __DIR__.'/auth.php';

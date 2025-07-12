@@ -240,7 +240,7 @@
                                 <strong><em>{{ $project->role }}</em></strong>
                             </div>
                             <div style="text-align: right; line-height: 1.2;">
-                                <strong><em>TeamSize:</em></strong> {{ $project->team_size }}<br>
+                                <strong><em>TeamSize:</em></strong> <em>{{ $project->team_size }}</em><br>
                                 <em>{{ $project->duration }}</em>
                             </div>
                         </div>

@@ -20,7 +20,8 @@
             align-items: center;
         }
 
-        .welcome-card {
+        .welcome-card,
+        .ai-suggestions-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border-radius: 20px;
@@ -40,6 +41,50 @@
         .welcome-card p {
             font-size: 1.1rem;
             color: #c9d1d9;
+        }
+
+        .ai-suggestions-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px 35px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .ai-suggestions-card h2 {
+            font-size: 1.8rem;
+            color: #58a6ff;
+            margin-bottom: 15px;
+        }
+
+        .ai-suggestions-card pre {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: #c9d1d9;
+            font-size: 1rem;
+            text-align: left;
+            padding: 15px;
+            border-radius: 15px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .suggestions-btn {
+            background: linear-gradient(135deg, #238636, #2ea043);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border: none;
+        }
+
+        .suggestions-btn:hover {
+            background: linear-gradient(135deg, #2ea043, #45d96e);
         }
 
         .dashboard-title {
@@ -64,7 +109,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 30px;
             border-radius: 20px;
-            width: 320px;
+            width: 520px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease;
             opacity: 0;
@@ -138,13 +183,31 @@
         <div class="container">
             <!-- 👋 Welcome User -->
             <div class="welcome-card">
-                <h1>Welcome, <?php echo e(Auth::user()->name); ?> 👋</h1>
+                <h1 class="template-name">Welcome, <?php echo e(Auth::user()->name); ?> 👋</h1>
                 <p>Glad to see you back on your dashboard!</p>
+            </div>
+
+            <!-- 🤖 AI Resume Suggestions -->
+            <div class="ai-suggestions-card">
+                <h2 class="template-name">AI Resume Suggestions</h2>
+
+                <form action="<?php echo e(route('dashboard.suggestions')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <button type="submit" class="suggestions-btn">Get Suggestions</button>
+                </form>
+
+                <?php if(isset($suggestions)): ?>
+                    <div class="ai-suggestions"
+                        style="background:#161b22; color:#e6edf3; padding:20px; border-radius:8px; margin-top:20px;">
+                        <h3 style="color:#58a6ff;">💡 AI Suggestions for Your Resume:</h3>
+                        <p><?php echo nl2br(e($suggestions)); ?></p>
+                    </div>
+                <?php endif; ?>
+
             </div>
 
             <!-- 📝 Resume Templates -->
             <div class="template-grid">
-                <!-- Resume Template Card -->
                 <div class="template-card">
                     <h3 class="template-name">MEC Resume Template</h3>
                     <p class="template-desc">A clean and professional format tailored for MEC students.</p>

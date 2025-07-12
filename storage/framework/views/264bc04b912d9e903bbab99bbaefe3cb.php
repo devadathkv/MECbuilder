@@ -245,7 +245,7 @@
                                 <strong><em><?php echo e($project->role); ?></em></strong>
                             </div>
                             <div style="text-align: right; line-height: 1.2;">
-                                <strong><em>TeamSize:</em></strong> <?php echo e($project->team_size); ?><br>
+                                <strong><em>TeamSize:</em></strong> <em><?php echo e($project->team_size); ?></em><br>
                                 <em><?php echo e($project->duration); ?></em>
                             </div>
                         </div>

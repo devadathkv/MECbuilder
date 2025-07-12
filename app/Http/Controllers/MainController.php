@@ -13,6 +13,8 @@ use App\Models\Education;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Browsershot\Browsershot;
+use App\Services\GeminiService;
+
 
 class MainController extends Controller
 {
@@ -63,5 +65,53 @@ public function downloadPDF()
             ->pdf();
     }, 'Devadath_KV_Resume.pdf');
 }
+
+    public function index(){
+        return view('dashboard');
+    }
+
+public function fetchSuggestions(Request $request, GeminiService $geminiService)
+{
+    $userId = auth()->id();
+
+    // 📝 Fetch resume data from DB
+    $achievements = \App\Models\Achievement::where('user_id', $userId)->pluck('title')->implode("\n");
+    $projects = \App\Models\Project::where('user_id', $userId)->pluck('description')->implode("\n");
+    $skillsModel = \App\Models\Skill::where('user_id', $userId)->first();
+
+    $skills = $skillsModel
+        ? "Technical Skills: {$skillsModel->technical}\nSoft Skills: {$skillsModel->soft}\nInterests: {$skillsModel->interests}"
+        : "Technical Skills: PHP, Laravel\nSoft Skills: Communication\nInterests: AI";
+
+    $resumeContent = <<<EOT
+Skills:
+$skills
+
+Projects:
+$projects
+
+Achievements:
+$achievements
+EOT;
+
+    // 🧠 Call Gemini API
+    $suggestions = $geminiService->analyzeResume($resumeContent);
+
+    // 🛡 Fallback suggestions if API fails
+    if (str_starts_with($suggestions, '❌ Error')) {
+        $suggestions = <<<EOT
+✅ Add measurable achievements (e.g., "Increased efficiency by 20%").
+✅ Highlight relevant projects with technologies used.
+✅ Emphasize your soft skills in team roles and communication.
+✅ Keep formatting clean and consistent.
+EOT;
+    }
+
+    return view('dashboard', [
+        'suggestions' => $suggestions
+    ]);
+}
+
+
 
 }
