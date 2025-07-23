@@ -35,6 +35,9 @@ COPY . /var/www
 # Set folder permissions
 RUN chown -R www-data:www-data /var/www
 
+# Install PHP dependencies
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+
 # Expose port 8000 and start Laravel dev server
 EXPOSE 8000
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
