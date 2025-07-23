@@ -44,9 +44,9 @@ RUN mkdir -p /var/www/storage/framework/sessions /var/www/storage/framework/view
 # Set Laravel's public folder as the document root
 WORKDIR /var/www/public
 
-# Copy vendor folder
-COPY vendor/ /var/www/vendor
 
+# Install composer dependencies inside container
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 # Expose port 8000 and start Laravel dev server
 EXPOSE 8000
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
