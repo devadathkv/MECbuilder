@@ -35,11 +35,14 @@ COPY . /var/www
 # Set folder permissions
 RUN chown -R www-data:www-data /var/www
 
-# Set permissions for Laravel
+# ✅ Fix storage and cache permissions
 RUN mkdir -p /var/www/storage/framework/sessions /var/www/storage/framework/views /var/www/storage/framework/cache \
     && mkdir -p /var/www/bootstrap/cache \
     && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
+# Set Laravel's public folder as the document root
+WORKDIR /var/www/public
 
 # Install PHP dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -47,3 +50,4 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 # Expose port 8000 and start Laravel dev server
 EXPOSE 8000
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
