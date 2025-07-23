@@ -8,7 +8,7 @@ WORKDIR /var/www
 RUN apt-get update && apt-get install -y \
     build-essential \
     libpng-dev \
-    libjpeg62-turbo-dev \
+    libjpeg-dev \
     libfreetype6-dev \
     libpq-dev \
     locales \
@@ -20,11 +20,8 @@ RUN apt-get update && apt-get install -y \
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions (note pdo_pgsql for PostgreSQL)
-RUN docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg && \
-    docker-php-ext-install \
+# Install PHP extensions
+RUN docker-php-ext-install \
     pdo_pgsql \
     mbstring \
     exif \
