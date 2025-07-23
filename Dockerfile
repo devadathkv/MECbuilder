@@ -53,6 +53,12 @@ RUN mkdir -p /var/www/storage/framework/{sessions,views,cache} \
 # Install PHP dependencies using Composer
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Expose port 8000 and start Laravel dev server
-EXPOSE 8000
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Use Apache to serve Laravel
+RUN apt-get install -y apache2 libapache2-mod-php && \
+    a2enmod rewrite
+
+# Copy Laravel public directory to Apache web root
+RUN rm -rf /var/www/html && ln -s /var/www/public /var/www/html
+
+EXPOSE 80
+CMD ["apache2-foreground"]
