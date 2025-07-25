@@ -1,4 +1,4 @@
-# Use the official PHP 8.2 with Apache image
+# Use the official PHP 8.2 Apache image
 FROM php:8.2-apache
 
 # Set working directory
@@ -16,40 +16,39 @@ RUN apt-get update && apt-get install -y \
     zip unzip git curl && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Configure GD library
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+# Configure and install GD extension
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
+    docker-php-ext-install \
+        pdo \
+        pdo_pgsql \
+        mbstring \
+        exif \
+        pcntl \
+        bcmath \
+        gd \
+        zip
 
-# Install PHP extensions
-RUN docker-php-ext-install \
-    pdo \
-    pdo_pgsql \
-    mbstring \
-    exif \
-    pcntl \
-    bcmath \
-    gd \
-    zip
-
-# Enable Apache rewrite module
+# Enable Apache mod_rewrite for Laravel routes
 RUN a2enmod rewrite
 
-# Install Composer
+# Install Composer globally (from official Composer image)
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy Laravel app into the container
-COPY . /var/www/html
+# Copy Laravel application code
+COPY . .
 
-# Set proper permissions
+# Fix Apache DocumentRoot to point to /public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+
+# Set proper permissions for Laravel storage and cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
     chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Install Laravel dependencies
+# Install Laravel PHP dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Update Apache DocumentRoot to Laravel public directory
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
-
+# Expose web server port
 EXPOSE 80
 
-# Start Apache in foreground
+# Start Apache
 CMD ["apache2-foreground"]
