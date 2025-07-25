@@ -1,7 +1,8 @@
-# Use the official PHP 8.2 FPM image
+# Use the official PHP 8.2 with Apache image
 FROM php:8.2-apache
+
 # Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 # Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
@@ -12,15 +13,11 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libzip-dev \
     libpq-dev \
-    zip unzip git curl
+    zip unzip git curl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Clean up cached files to reduce image size
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Configure GD library for PHP
-RUN docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg
+# Configure GD library
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Install PHP extensions
 RUN docker-php-ext-install \
@@ -33,31 +30,26 @@ RUN docker-php-ext-install \
     gd \
     zip
 
-# Install Composer globally
+# Enable Apache rewrite module
+RUN a2enmod rewrite
+
+# Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy Laravel project files into container
-COPY . /var/www
+# Copy Laravel app into the container
+COPY . /var/www/html
 
-# Set correct ownership and permissions
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Fix storage and cache directory permissions
-RUN mkdir -p /var/www/storage/framework/{sessions,views,cache} \
-    && mkdir -p /var/www/bootstrap/cache \
-    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
-    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
-
-# Install PHP dependencies using Composer
+# Install Laravel dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Use Apache to serve Laravel
-RUN apt-get install -y apache2 libapache2-mod-php && \
-    a2enmod rewrite
-
-# Copy Laravel public directory to Apache web root
-RUN rm -rf /var/www/html && ln -s /var/www/public /var/www/html
+# Update Apache DocumentRoot to Laravel public directory
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
+
+# Start Apache in foreground
 CMD ["apache2-foreground"]
