@@ -1,6 +1,6 @@
-<p align="center"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></p>
-🧠 Laravel Resume Builder — Exclusively for MEC
-A custom Laravel-based Resume Builder project to solve one of the most common and annoying problems faced by students and placement cells: formatting resumes with proper alignment, spacing, and consistent design. Inspired by real-world frustrations during campus placements, this app helps users generate clean, professional resumes with strict layout rules.
+<p align="center"> <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"> </p>
+<h1 align="center">🧠 Laravel Resume Builder — Exclusively for MEC</h1>
+A custom-built Laravel Resume Builder designed to solve one of the most common frustrations faced by students and placement cells — creating resumes with perfect alignment, spacing, and design consistency.
 
 📌 Why I Built This
 Every placement season, hundreds of students struggle with:
