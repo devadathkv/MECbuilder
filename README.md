@@ -97,3 +97,12 @@ Run php artisan config:cache before final push
 
 💬 Final Note
 I made this project to help fellow students and academic institutions ease the resume preparation process. This builder saves time, avoids design headaches, and ensures everyone’s resume follows the same professional layout.
+
+Here are some attached screenshots..
+<img width="1836" height="900" alt="Screenshot 2025-07-27 184344" src="https://github.com/user-attachments/assets/f8304c1d-f88e-4c7d-b46e-baa35ec89fc5" />
+<img width="1846" height="924" alt="Screenshot 2025-07-27 184603" src="https://github.com/user-attachments/assets/a43185dd-b205-4b72-a4a0-110613407f52" />
+<img width="1847" height="923" alt="Screenshot 2025-07-27 190128" src="https://github.com/user-attachments/assets/3ac52f41-df05-4394-82d9-e25ca50b10a7" />
+<img width="1847" height="915" alt="Screenshot 2025-07-27 190041" src="https://github.com/user-attachments/assets/03593156-d125-4b19-ac56-9b30aee0de0c" />
+<img width="1834" height="924" alt="Screenshot 2025-07-27 190211" src="https://github.com/user-attachments/assets/25df4f12-2d9d-4292-8c04-566086bb7f01" />
+
+
